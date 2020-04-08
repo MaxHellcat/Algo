@@ -19,7 +19,7 @@ func isSorted(arr: Array<Int>) -> Bool {
     return true
 }
 
-var arr = Array<Int>(1...1000)
+var arr = Array<Int>(1...100)
 arr.shuffle()
 
 print("\(arr), sorted: \(isSorted(arr: arr))")
@@ -28,7 +28,8 @@ let before = Date().timeIntervalSince1970
 
 //insertionSort(&arr)
 //mergeSort(&arr, 0, arr.count-1)
-quickSort(&arr, 0, arr.count-1)
+//quickSort(&arr, 0, arr.count-1)
+heapSort(&arr)
 
 let after = Date().timeIntervalSince1970
 var duration = after - before
