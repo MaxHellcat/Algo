@@ -42,9 +42,9 @@ func partition(_ arr: inout Array<Int>, _ p: Int, _ r: Int) -> Int {
 
 func randomizedPartition(_ arr: inout Array<Int>, _ p: Int, _ r: Int) -> Int {
 
-    let index = Int.random(in: 0..<arr.count)
+    let index = Int.random(in: p...r) // Caveat: Be careful here to not select in 0..<arr.count
 
-    arr.swapAt(index, arr.count-1)
+    arr.swapAt(index, r)
 
     return partition(&arr, p, r)
 }
