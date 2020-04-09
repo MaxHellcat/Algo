@@ -15,7 +15,7 @@ func quickSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
 
     if p < r {
 
-        let q = partition(&arr, p, r)
+        let q = randomizedPartition(&arr, p, r)
 
         quickSort(&arr, p, q-1)
         quickSort(&arr, q+1, r)
@@ -38,4 +38,13 @@ func partition(_ arr: inout Array<Int>, _ p: Int, _ r: Int) -> Int {
     arr.swapAt(i+1, r)
 
     return i+1
+}
+
+func randomizedPartition(_ arr: inout Array<Int>, _ p: Int, _ r: Int) -> Int {
+
+    let index = Int.random(in: 0..<arr.count)
+
+    arr.swapAt(index, arr.count-1)
+
+    return partition(&arr, p, r)
 }
