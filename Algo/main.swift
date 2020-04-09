@@ -19,7 +19,7 @@ func isSorted(arr: Array<Int>) -> Bool {
     return true
 }
 
-var arr = Array<Int>(1...100)
+var arr = Array<Int>(1...10)
 //arr.reverse()
 arr.shuffle()
 
@@ -29,11 +29,20 @@ let before = Date().timeIntervalSince1970
 
 //insertionSort(&arr)
 //mergeSort(&arr, 0, arr.count-1)
-quickSort(&arr, 0, arr.count-1)
+//quickSort(&arr, 0, arr.count-1)
 //heapSort(&arr)
+
+//[3, 2, 8, 10, 1, 4, 5, 7, 6, 9], sorted: false
+//The 7th order statistic: 6
+
+let i = 7
+let orderStatistic = randomizedSelect(&arr, 0, arr.count-1, i)
+print("The \(i)th order statistic: \(orderStatistic)")
+let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
+print("The \(i)th order statistic: \(orderStatisticIter)")
 
 let after = Date().timeIntervalSince1970
 var duration = after - before
 
-print("\(arr), sorted: \(isSorted(arr: arr))")
+//print("\(arr), sorted: \(isSorted(arr: arr))")
 print("Took: \(duration) seconds")

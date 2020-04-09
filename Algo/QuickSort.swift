@@ -9,7 +9,7 @@
 import Foundation
 
 //
-// Time O(n^2), space O(1)
+// Time Ø(n^2) - worst, Ø(nlgn) - expected, space O(1)
 //
 func quickSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
 
@@ -22,6 +22,7 @@ func quickSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
     }
 }
 
+// Time Ø(n), space O(1)
 func partition(_ arr: inout Array<Int>, _ p: Int, _ r: Int) -> Int {
 
     let pivot = arr[r]

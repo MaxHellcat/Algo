@@ -12,6 +12,7 @@
 		AE541743243DD8C700620714 /* HeapSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE541742243DD8C700620714 /* HeapSort.swift */; };
 		AE6419F3243B3FCF00776501 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6419F2243B3FCF00776501 /* main.swift */; };
 		AE6419FA243B3FED00776501 /* InsertionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6419F9243B3FED00776501 /* InsertionSort.swift */; };
+		AE67A962243F25120081D1ED /* RandomizedSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE67A961243F25120081D1ED /* RandomizedSelect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 		AE6419EF243B3FCF00776501 /* Algo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algo; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6419F2243B3FCF00776501 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		AE6419F9243B3FED00776501 /* InsertionSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionSort.swift; sourceTree = "<group>"; };
+		AE67A961243F25120081D1ED /* RandomizedSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizedSelect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				AE2127D0243CDCE300DB03D9 /* MergeSort.swift */,
 				AE2127D2243CF40C00DB03D9 /* QuickSort.swift */,
 				AE541742243DD8C700620714 /* HeapSort.swift */,
+				AE67A961243F25120081D1ED /* RandomizedSelect.swift */,
 				AE6419F2243B3FCF00776501 /* main.swift */,
 			);
 			path = Algo;
@@ -136,6 +139,7 @@
 				AE6419F3243B3FCF00776501 /* main.swift in Sources */,
 				AE6419FA243B3FED00776501 /* InsertionSort.swift in Sources */,
 				AE2127D3243CF40C00DB03D9 /* QuickSort.swift in Sources */,
+				AE67A962243F25120081D1ED /* RandomizedSelect.swift in Sources */,
 				AE541743243DD8C700620714 /* HeapSort.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
