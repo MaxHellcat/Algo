@@ -32,14 +32,28 @@ let before = Date().timeIntervalSince1970
 //quickSort(&arr, 0, arr.count-1)
 //heapSort(&arr)
 
-//[3, 2, 8, 10, 1, 4, 5, 7, 6, 9], sorted: false
-//The 7th order statistic: 6
+//let i = 7
+//let orderStatistic = randomizedSelect(&arr, 0, arr.count-1, i)
+//print("The \(i)th order statistic: \(orderStatistic)")
+//let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
+//print("The \(i)th order statistic: \(orderStatisticIter)")
 
-let i = 7
-let orderStatistic = randomizedSelect(&arr, 0, arr.count-1, i)
-print("The \(i)th order statistic: \(orderStatistic)")
-let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
-print("The \(i)th order statistic: \(orderStatisticIter)")
+let list = SinglyLinkedList()
+
+list.insert(node: SinglyLinkedList.Node(key: 1))
+list.insert(node: SinglyLinkedList.Node(key: 2))
+list.insert(node: SinglyLinkedList.Node(key: 3))
+print("List: \(list)")
+
+weak var node = list.search(key: 2)
+if let node = node {
+    print("Found node: \(node)")
+}
+
+if let node = node {
+    list.remove(node: node)
+    print("List: \(list)")
+}
 
 let after = Date().timeIntervalSince1970
 var duration = after - before

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1732712446296900BE7231 /* SinglyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1732702446296900BE7231 /* SinglyLinkedList.swift */; };
 		AE2127D1243CDCE300DB03D9 /* MergeSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2127D0243CDCE300DB03D9 /* MergeSort.swift */; };
 		AE2127D3243CF40C00DB03D9 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2127D2243CF40C00DB03D9 /* QuickSort.swift */; };
 		AE541743243DD8C700620714 /* HeapSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE541742243DD8C700620714 /* HeapSort.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AE1732702446296900BE7231 /* SinglyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglyLinkedList.swift; sourceTree = "<group>"; };
 		AE2127D0243CDCE300DB03D9 /* MergeSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSort.swift; sourceTree = "<group>"; };
 		AE2127D2243CF40C00DB03D9 /* QuickSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSort.swift; sourceTree = "<group>"; };
 		AE541742243DD8C700620714 /* HeapSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapSort.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				AE2127D2243CF40C00DB03D9 /* QuickSort.swift */,
 				AE541742243DD8C700620714 /* HeapSort.swift */,
 				AE67A961243F25120081D1ED /* RandomizedSelect.swift */,
+				AE1732702446296900BE7231 /* SinglyLinkedList.swift */,
 				AE6419F2243B3FCF00776501 /* main.swift */,
 			);
 			path = Algo;
@@ -139,6 +142,7 @@
 				AE6419F3243B3FCF00776501 /* main.swift in Sources */,
 				AE6419FA243B3FED00776501 /* InsertionSort.swift in Sources */,
 				AE2127D3243CF40C00DB03D9 /* QuickSort.swift in Sources */,
+				AE1732712446296900BE7231 /* SinglyLinkedList.swift in Sources */,
 				AE67A962243F25120081D1ED /* RandomizedSelect.swift in Sources */,
 				AE541743243DD8C700620714 /* HeapSort.swift in Sources */,
 			);
