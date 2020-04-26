@@ -93,33 +93,6 @@ class SinglyLinkedList {
     }
 }
 
-extension SinglyLinkedList {
-
-    class func test() {
-
-        let list = SinglyLinkedList()
-
-        for i in 1...10 {
-            list.insert(node: SinglyLinkedList.Node(key: i), atNode: nil)
-        }
-        print("List: \(list)")
-
-        let key = 7
-        print("Search node \(key)")
-        weak var node = list.search(key: key)
-        print("Found node: \(String(describing: node))")
-
-        let newNode = SinglyLinkedList.Node(key: 25)
-        print("Insert node \(newNode) at \(String(describing: node))")
-        list.insert(node: newNode, atNode: node)
-        print("List: \(list)")
-
-        print("Remove node \(newNode)")
-        list.remove(node: newNode)
-        print("List: \(list)")
-    }
-}
-
 extension SinglyLinkedList: CustomStringConvertible {
 
     var description: String {
@@ -144,5 +117,32 @@ extension SinglyLinkedList.Node: CustomStringConvertible {
 
     var description: String {
         return "(key: \(key))"
+    }
+}
+
+extension SinglyLinkedList {
+
+    class func test() {
+
+        let list = SinglyLinkedList()
+
+        for i in 1...10 {
+            list.insert(node: SinglyLinkedList.Node(key: i), atNode: nil)
+        }
+        print("List: \(list)")
+
+        let key = 7
+        print("Search node \(key)")
+        weak var node = list.search(key: key)
+        print("Found node: \(String(describing: node))")
+
+        let newNode = SinglyLinkedList.Node(key: 25)
+        print("Insert node \(newNode) at \(String(describing: node))")
+        list.insert(node: newNode, atNode: node)
+        print("List: \(list)")
+
+        print("Remove node \(newNode)")
+        list.remove(node: newNode)
+        print("List: \(list)")
     }
 }

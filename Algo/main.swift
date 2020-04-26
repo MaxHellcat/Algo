@@ -38,7 +38,7 @@ let before = Date().timeIntervalSince1970
 //let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
 //print("The \(i)th order statistic: \(orderStatisticIter)")
 
-SinglyLinkedList.test()
+BinarySearchTree.test()
 
 let after = Date().timeIntervalSince1970
 var duration = after - before

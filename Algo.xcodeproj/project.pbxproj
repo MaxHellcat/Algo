@@ -14,6 +14,7 @@
 		AE6419F3243B3FCF00776501 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6419F2243B3FCF00776501 /* main.swift */; };
 		AE6419FA243B3FED00776501 /* InsertionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6419F9243B3FED00776501 /* InsertionSort.swift */; };
 		AE67A962243F25120081D1ED /* RandomizedSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE67A961243F25120081D1ED /* RandomizedSelect.swift */; };
+		AEE9D2F2245619E800655125 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE9D2F1245619E800655125 /* BinarySearchTree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		AE6419F2243B3FCF00776501 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		AE6419F9243B3FED00776501 /* InsertionSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionSort.swift; sourceTree = "<group>"; };
 		AE67A961243F25120081D1ED /* RandomizedSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizedSelect.swift; sourceTree = "<group>"; };
+		AEE9D2F1245619E800655125 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				AE541742243DD8C700620714 /* HeapSort.swift */,
 				AE67A961243F25120081D1ED /* RandomizedSelect.swift */,
 				AE1732702446296900BE7231 /* SinglyLinkedList.swift */,
+				AEE9D2F1245619E800655125 /* BinarySearchTree.swift */,
 				AE6419F2243B3FCF00776501 /* main.swift */,
 			);
 			path = Algo;
@@ -142,6 +145,7 @@
 				AE6419F3243B3FCF00776501 /* main.swift in Sources */,
 				AE6419FA243B3FED00776501 /* InsertionSort.swift in Sources */,
 				AE2127D3243CF40C00DB03D9 /* QuickSort.swift in Sources */,
+				AEE9D2F2245619E800655125 /* BinarySearchTree.swift in Sources */,
 				AE1732712446296900BE7231 /* SinglyLinkedList.swift in Sources */,
 				AE67A962243F25120081D1ED /* RandomizedSelect.swift in Sources */,
 				AE541743243DD8C700620714 /* HeapSort.swift in Sources */,
