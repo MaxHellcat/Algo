@@ -8,14 +8,14 @@
 
 import Foundation
 
-class BinarySearchTree {
+public class BinarySearchTree {
 
-    class Node {
+    public class Node {
 
-        let key: Int
-        var parent: Node?, left: Node?, right: Node?
+        public let key: Int
+        public var parent: Node?, left: Node?, right: Node?
 
-        init(key: Int) {
+        public init(key: Int) {
             self.key = key
         }
 
@@ -24,12 +24,14 @@ class BinarySearchTree {
         }
     }
 
-    var root: Node?
+    public var root: Node?
+
+    public init() {}
 
     ///
     /// Time O(h)
     ///
-    func insert(node: Node) {
+    public func insert(node: Node) {
 
         var tmpNode = root
         var parent: Node? = nil
@@ -66,7 +68,7 @@ class BinarySearchTree {
     ///
     /// Time O(h)
     ///
-    func delete(node: Node) {
+    public func delete(node: Node) {
 
         if node.left == nil {
 
@@ -135,7 +137,7 @@ class BinarySearchTree {
     ///
     /// Time O(h)
     ///
-    func search(node: Node, key: Int) -> Node? {
+    public func search(key: Int) -> Node? {
 
         var tmpNode = root
 
@@ -235,7 +237,7 @@ class BinarySearchTree {
 
 extension BinarySearchTree.Node: CustomStringConvertible {
 
-    var description: String {
+    public var description: String {
         return "(key: \(key))"
     }
 }
@@ -257,7 +259,7 @@ extension BinarySearchTree {
         print("Max: \(tree.max(node: tree.root!))")
 
         let key = 3
-        let node = tree.search(node: tree.root!, key: key)!
+        let node = tree.search(key: key)!
         print("Search \(key): \(String(describing: node))")
 
         print("Successor of \(key): \(String(describing: tree.successor(node: node)))")
