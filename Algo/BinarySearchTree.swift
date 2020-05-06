@@ -68,82 +68,67 @@ class BinarySearchTree {
     ///
     func delete(node: Node) {
 
-        if node.right == nil {
+        if node.left == nil {
 
-            // Either right or both are nil
+            // Left is nil, right may or may not be nil
 
-            print("Either right or both are nil")
+            print("Left is nil, right may or may not be nil")
 
-            transplant(node: node, childNode: node.left)
+            transplant(u: node, v: node.right)
         }
-        else if node.right != nil {
+        else if node.right == nil {
 
-            // Left is nil, right is valid
+            // Right is nil, left is valid
 
-            print("Left is nil, right is valid")
+            print("Right is nil, left is valid")
+
+            transplant(u: node, v: node.left)
+        }
+        else {
+
+            // Right and left are valid
+
+            print("Right and left are valid")
 
             let minNode = min(node: node.right!)
 
-            if node.right === minNode {
+            if node.right !== minNode {
 
-                // Right is minimum (it has no left)
+                // Right is not minimum, doing sub-trasnplant first
 
-                print("Right is minimum (it has no left)")
+                print("Right is not minimum, doing sub-transplant first")
 
-                transplant(node: node, childNode: node.right)
-            }
-            else {
+                transplant(u: minNode, v: minNode.right)
 
-                // Right is not minimum (it has left)
-
-                print("Right is not minimum (it has left)")
-
-                let tmpMinNode = minNode
-
-                transplant(node: minNode, childNode: minNode.right)
-
-                tmpMinNode.right = node.right
-                node.right!.parent = tmpMinNode
-
-                if node.parent != nil {
-
-                    if node.parent!.left === node {
-                        node.parent!.left = tmpMinNode
-                    }
-                    else {
-                        node.parent!.right = tmpMinNode
-                    }
-
-                    tmpMinNode.parent = node.parent
-                }
+                minNode.right = node.right
+                minNode.right!.parent = minNode
             }
 
-            if node.left != nil {
-                node.left!.parent = minNode
-                minNode.left = node.left
-            }
+            transplant(u: node, v: minNode)
+
+            minNode.left = node.left
+            minNode.left!.parent = minNode
         }
     }
 
+    /// Replaces the subtree rooted at node u with the subtree rooted at node v (v allowed to be nil by design)
     ///
     /// Time O(1)
     ///
-    private func transplant(node: Node, childNode: Node?) {
+    private func transplant(u: Node, v: Node?) {
 
-        if node.parent == nil {
-            root = childNode
-            return
+        if u.parent == nil {
+            root = v
         }
-
-        if node.parent!.left === node {
-            node.parent!.left = childNode
+        else if u.parent!.left === u {
+            u.parent!.left = v
         }
         else {
-            node.parent!.right = childNode
+            u.parent!.right = v
         }
 
-        if childNode != nil {
-            childNode!.parent = node.parent
+        if v != nil {
+            v!.parent = u.parent
         }
     }
 
@@ -283,6 +268,5 @@ extension BinarySearchTree {
 
         print("Tree:")
         tree.traverseInOrder(node: tree.root) { print($0.key) }
-
     }
 }
