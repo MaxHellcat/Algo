@@ -10,7 +10,11 @@ import Foundation
 
 public class BinarySearchTree {
 
-    public class Node {
+    public class Node: Equatable {
+
+        public static func == (lhs: Node, rhs: Node) -> Bool {
+             return lhs === lhs
+        }
 
         public let key: Int
         public var parent: Node?, left: Node?, right: Node?
@@ -94,7 +98,7 @@ public class BinarySearchTree {
 
             let minNode = min(node: node.right!)
 
-            if node.right !== minNode {
+            if node.right != minNode {
 
                 // Right is not minimum, doing sub-trasnplant first
 
@@ -122,7 +126,7 @@ public class BinarySearchTree {
         if u.parent == nil {
             root = v
         }
-        else if u.parent!.left === u {
+        else if u.parent!.left == u {
             u.parent!.left = v
         }
         else {
@@ -194,7 +198,7 @@ public class BinarySearchTree {
         var tmpNode = node
         var tmpParent = tmpNode.parent
 
-        while tmpParent != nil && tmpParent!.left !== tmpNode {
+        while tmpParent != nil && tmpParent!.left != tmpNode {
             tmpNode = tmpParent!
             tmpParent = tmpParent!.parent
         }
@@ -214,7 +218,7 @@ public class BinarySearchTree {
         var tmpNode = node
         var tmpParent = tmpNode.parent
 
-        while tmpParent != nil && tmpParent!.right !== tmpNode {
+        while tmpParent != nil && tmpParent!.right != tmpNode {
             tmpNode = tmpParent!
             tmpParent = tmpParent!.parent
         }

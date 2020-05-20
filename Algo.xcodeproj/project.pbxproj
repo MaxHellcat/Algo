@@ -18,6 +18,16 @@
 		AEFDA219246322850090E449 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA213246322850090E449 /* QuickSort.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AE2BF21224755E840090F575 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEFDA1F8246321CE0090E449 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AEFDA200246321CE0090E449;
+			remoteInfo = Algo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		AE2BF1E1247514F00090F575 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -130,6 +140,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AE2BF21324755E840090F575 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -226,6 +237,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AE2BF21324755E840090F575 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AEFDA200246321CE0090E449 /* Algo */;
+			targetProxy = AE2BF21224755E840090F575 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AE2BF1E7247514F00090F575 /* Debug */ = {
