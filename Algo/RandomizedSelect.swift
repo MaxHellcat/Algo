@@ -11,7 +11,7 @@ import Foundation
 //
 // Time Ø(n^2) - worst, Ø(nlgn) - expected, space O(1)
 //
-func randomizedSelect(_ arr: inout Array<Int>, _ p: Int, _ r: Int, _ i: Int) -> Int {
+public func randomizedSelect(_ arr: inout Array<Int>, _ p: Int, _ r: Int, _ i: Int) -> Int {
 
     if p == r {
         return arr[p]
@@ -37,7 +37,7 @@ func randomizedSelect(_ arr: inout Array<Int>, _ p: Int, _ r: Int, _ i: Int) -> 
 //
 // Exercise 9.2-3 in CLRS
 //
-func randomizedSelectIterative(_ arr: inout Array<Int>, _ p: Int, _ r: Int, _ i: Int) -> Int {
+public func randomizedSelectIterative(_ arr: inout Array<Int>, _ p: Int, _ r: Int, _ i: Int) -> Int {
 
     var tmpP = p, tmpR = r, tmpI = i, resultIndex = p
 

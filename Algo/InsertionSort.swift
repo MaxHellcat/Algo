@@ -11,7 +11,7 @@ import Foundation
 //
 // Time O(n^2), space O(1) (here and further space doesn't include recursion-tree sized stack)
 //
-func insertionSort(_ arr: inout Array<Int>) {
+public func insertionSort(_ arr: inout Array<Int>) {
 
     for i in 1..<arr.count {
 

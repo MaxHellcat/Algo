@@ -11,7 +11,7 @@ import Foundation
 //
 // Time Ø(nlgn), space O(n)
 //
-func mergeSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
+public func mergeSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
 
     if p < r {
 

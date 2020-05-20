@@ -11,7 +11,7 @@ import Foundation
 //
 // Time O(nlgn), space O(1)
 //
-func heapSort(_ arr: inout Array<Int>) {
+public func heapSort(_ arr: inout Array<Int>) {
 
     var maxHeap = MaxHeap()
 

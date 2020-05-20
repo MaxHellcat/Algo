@@ -244,7 +244,7 @@ extension BinarySearchTree.Node: CustomStringConvertible {
 
 extension BinarySearchTree {
 
-    class func test() {
+    public class func test() {
 
         let tree = BinarySearchTree()
 

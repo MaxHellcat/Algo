@@ -11,7 +11,7 @@ import Foundation
 //
 // Time Ø(n^2) - worst, Ø(nlgn) - expected, space O(1)
 //
-func quickSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
+public func quickSort(_ arr: inout Array<Int>, _ p: Int, _ r: Int) {
 
     if p < r {
 
