@@ -10,10 +10,13 @@ import Foundation
 
 public class BinarySearchTree {
 
-    public class Node: Equatable {
+    public class Node: Equatable, CustomStringConvertible {
 
         public static func == (lhs: Node, rhs: Node) -> Bool {
-             return lhs === lhs
+             return lhs === rhs
+        }
+        public var description: String {
+            return "(key: \(key))"
         }
 
         public let key: Int
@@ -26,6 +29,7 @@ public class BinarySearchTree {
         deinit {
             print("Deinit node \(self)")
         }
+
     }
 
     public var root: Node?
@@ -37,13 +41,11 @@ public class BinarySearchTree {
     ///
     public func insert(node: Node) {
 
-        var tmpNode = root
         var parent: Node? = nil
+        var tmpNode = root
 
         while tmpNode != nil {
-
             parent = tmpNode
-
             if node.key <= tmpNode!.key {
                 tmpNode = tmpNode!.left
             }
@@ -53,18 +55,15 @@ public class BinarySearchTree {
         }
 
         if parent == nil {
-
             root = node
         }
         else {
-
             if node.key <= parent!.key {
                 parent!.left = node
             }
             else {
                 parent!.right = node
             }
-
             node.parent = parent
         }
     }
@@ -239,21 +238,15 @@ public class BinarySearchTree {
     }
 }
 
-extension BinarySearchTree.Node: CustomStringConvertible {
-
-    public var description: String {
-        return "(key: \(key))"
-    }
-}
-
 extension BinarySearchTree {
 
+    // Hint: Use enum TestBinarySearchTree, or the like
     public class func test() {
 
         let tree = BinarySearchTree()
 
         for i in Array(1...10).shuffled() {
-            tree.insert(node: BinarySearchTree.Node(key: i))
+            tree.insert(node: Node(key: i))
         }
 
         print("Tree:")
