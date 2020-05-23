@@ -76,7 +76,6 @@ public class BinarySearchTree {
         if node.left == nil {
 
             // Left is nil, right may or may not be nil
-
             print("Left is nil, right may or may not be nil")
 
             transplant(u: node, v: node.right)
@@ -84,7 +83,6 @@ public class BinarySearchTree {
         else if node.right == nil {
 
             // Right is nil, left is valid
-
             print("Right is nil, left is valid")
 
             transplant(u: node, v: node.left)
@@ -92,25 +90,21 @@ public class BinarySearchTree {
         else {
 
             // Right and left are valid
-
             print("Right and left are valid")
 
             let minNode = min(node: node.right!)
 
-            if node.right != minNode {
+            if minNode.parent != node {
 
                 // Right is not minimum, doing sub-trasnplant first
-
                 print("Right is not minimum, doing sub-transplant first")
 
                 transplant(u: minNode, v: minNode.right)
-
                 minNode.right = node.right
                 minNode.right!.parent = minNode
             }
 
             transplant(u: node, v: minNode)
-
             minNode.left = node.left
             minNode.left!.parent = minNode
         }

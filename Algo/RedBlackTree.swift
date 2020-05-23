@@ -38,16 +38,17 @@ public class RedBlackTree {
 
     }
 
-    public var root: Node
+    public var root: Node = Node.Nil
 
-    public init() {
-        root = Node.Nil
-    }
+    public init() {}
 
     deinit {
         print("Deinit RedBlackTree")
     }
 
+    ///
+    /// Time O(lgn)
+    ///
     public func insert(node: Node) {
 
         var parent = Node.Nil
@@ -77,51 +78,64 @@ public class RedBlackTree {
         node.left = Node.Nil
         node.right = Node.Nil
         node.color = .red
+
         insertFixup(node)
     }
 
+    ///
+    /// Time O(lgn)
+    ///
     private func insertFixup(_ aNode: Node) {
 
         var node = aNode
 
+        // Each iteration of the loop has two possible outcomes:
+        // Either the pointer moves up the tree (case 1)
+        // Or we perform some rotations and then the loop terminates (cases 2, 3)
         while node.parent.color == .red {
 
             if node.parent == node.parent.parent.left {
 
                 let uncle: Node = node.parent.parent.right
 
-                if uncle.color == .red {
+                if uncle.color == .red { // CASE 1
+                    print("CASE 1")
                     node.parent.color = .black
                     uncle.color = .black
                     node.parent.parent.color = .red
                     node = node.parent.parent
                 }
                 else {
-                    if node == node.parent.right {
+                    if node == node.parent.right { // CASE 2
+                        print("CASE 2")
                         node = node.parent
                         rotateLeft(node)
                     }
-                    node.parent.color = .black
+                    print("CASE 3")
+                    node.parent.color = .black // CASE 3
                     node.parent.parent.color = .red
                     rotateRight(node.parent.parent)
                 }
             }
-            else { // Here node.parent == node.parent.parent.right
+            else { // Symmetric case here `node.parent == node.parent.parent.right`
 
                 let uncle: Node = node.parent.parent.left
 
-                if uncle.color == .red {
+                if uncle.color == .red { // CASE 1
+                    print("CASE 1")
                     node.parent.color = .black
                     uncle.color = .black
                     node.parent.parent.color = .red
                     node = node.parent.parent
                 }
                 else {
-                    if node == node.parent.left {
+                    if node == node.parent.left { // CASE 2
+                        print("CASE 2")
                         node = node.parent
                         rotateRight(node)
                     }
-                    node.parent.color = .black
+                    print("CASE 3")
+                    node.parent.color = .black // CASE 3
                     node.parent.parent.color = .red
                     rotateLeft(node.parent.parent)
                 }
@@ -130,6 +144,166 @@ public class RedBlackTree {
         root.color = .black
     }
 
+    ///
+    /// Time O(lgn)
+    ///
+    public func delete(node: Node) {
+
+        var y = node
+        var yOriginalColor = y.color
+        let x: Node
+
+        if node.left == Node.Nil {
+
+            // Left is nil, right may or may not be nil
+            print("Left is nil, right may or may not be nil")
+
+            x = node.right
+            transplant(u: node, v: node.right)
+        }
+        else if node.right == Node.Nil {
+
+            // Right is nil, left is valid
+            print("Right is nil, left is valid")
+
+            x = node.left
+            transplant(u: node, v: node.left)
+        }
+        else {
+
+            // Right and left are valid
+            print("Right and left are valid")
+
+            y = min(node: node.right)
+            yOriginalColor = y.color
+            x = y.right
+
+            if y.parent == node {
+                x.parent = y // ?
+            }
+            else {
+                // Right is not minimum, doing sub-trasnplant first
+                print("Right is not minimum, doing sub-transplant first")
+
+                transplant(u: y, v: y.right)
+                y.right = node.right
+                y.right.parent = y
+            }
+
+            transplant(u: node, v: y)
+            y.left = node.left
+            y.left.parent = y
+            y.color = node.color
+        }
+
+        if yOriginalColor == .black {
+            deleteFixup(x)
+        }
+    }
+
+    ///
+    /// Time O(lgn)
+    ///
+    private func deleteFixup(_ aNode: Node) {
+
+        var node = aNode
+
+        // The goal of the while loop is to move the extra black up the tree
+        // Within the while loop, `node` always points to a nonroot doubly black node
+        while node != root && node.color == .black {
+
+            if node == node.parent.left {
+
+                print("DIRECT")
+
+                var w: Node = node.parent.right
+                if w.color == .red { // CASE 1
+                    print("CASE 1")
+                    w.color = .black
+                    node.parent.color = .red
+                    rotateLeft(node.parent)
+                    w = node.parent.right
+                    // The new sibling of `node`, which is one of w’s children prior to the rotation, is now black, and thus we have converted case 1 into case 2, 3, or 4.
+                }
+                if w.left.color == .black && w.right.color == .black { // CASE 2
+                    print("CASE 2")
+                    w.color = .red
+                    node = node.parent
+                }
+                else {
+                    if w.right.color == .black { // CASE 3
+                        print("CASE 3")
+                        w.left.color = .black
+                        w.color = .red
+                        rotateRight(w)
+                        w = node.parent.right
+                        // The new sibling w of `node` is now a black node with a red right child, and thus we have transformed case 3 into case 4.
+                    }
+                    print("CASE 4")
+                    w.color = node.parent.color // CASE 4
+                    node.parent.color = .black
+                    w.right.color = .black
+                    rotateLeft(node.parent)
+                    node = root
+                }
+            }
+            else { // Symmetric case here `node == node.parent.right`
+
+                print("SYMMETRIC")
+
+                var w: Node = node.parent.left
+                if w.color == .red { // CASE 1
+                    print("CASE 1")
+                    w.color = .black
+                    node.parent.color = .red
+                    rotateRight(node.parent)
+                    w = node.parent.left
+                }
+                if w.left.color == .black && w.right.color == .black { // CASE 2
+                    print("CASE 2")
+                    w.color = .red
+                    node = node.parent
+                }
+                else {
+                    if w.left.color == .black { // CASE 3
+                        print("CASE 3")
+                        w.right.color = .black
+                        w.color = .red
+                        rotateLeft(w)
+                        w = node.parent.left
+                    }
+                    print("CASE 4")
+                    w.color = node.parent.color // CASE 4
+                    node.parent.color = .black
+                    w.left.color = .black
+                    rotateRight(node.parent)
+                    node = root
+                }
+            }
+        }
+        node.color = .black
+    }
+
+    ///
+    /// Time O(1)
+    ///
+    private func transplant(u: Node, v: Node) {
+
+        if u.parent == Node.Nil {
+            root = v
+        }
+        else if u.parent.left == u {
+            u.parent.left = v
+        }
+        else {
+            u.parent.right = v
+        }
+        v.parent = u.parent
+    }
+
+    ///
+    /// Time O(1)
+    ///
     private func rotateLeft(_ x: Node) {
 
         assert(x.right != Node.Nil)
@@ -154,6 +328,9 @@ public class RedBlackTree {
         x.parent = y
     }
 
+    ///
+    /// Time O(1)
+    ///
     private func rotateRight(_ x: Node) {
 
         assert(x.left != Node.Nil)
@@ -179,7 +356,28 @@ public class RedBlackTree {
     }
 
     ///
-    /// Time O(h)
+    /// Time O(lgn)
+    ///
+    public func search(key: Int) -> Node? {
+
+        var tmpNode = root
+
+        while tmpNode != Node.Nil && key != tmpNode.key {
+
+            if key < tmpNode.key {
+                tmpNode = tmpNode.left
+            }
+            else {
+                tmpNode = tmpNode.right
+            }
+        }
+
+        return tmpNode
+    }
+
+
+    ///
+    /// Time O(lgn)
     ///
     func min(node: Node) -> Node {
 
@@ -193,7 +391,7 @@ public class RedBlackTree {
     }
 
     ///
-    /// Time O(h)
+    /// Time O(lgn)
     ///
     func max(node: Node) -> Node {
 
