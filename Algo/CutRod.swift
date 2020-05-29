@@ -58,11 +58,9 @@ func cutRodBottomUp(_ prices: Array<Int>, _ n: Int) -> Int {
     var q = Int.min
 
     for j in 1...n {
-
         for i in 1...j {
             q = max(q, prices[i-1] + mem[j-i])
         }
-
         mem[j] = q
     }
 
@@ -77,15 +75,12 @@ func cutRodBottomUpExtended(_ prices: Array<Int>, _ n: Int) -> (Int, Array<Int>)
     var q = Int.min
 
     for j in 1...n {
-
         for i in 1...j {
-
             if q < prices[i-1] + mem[j-i] {
                 q = prices[i-1] + mem[j-i]
                 rodSizes[j-1] = i
             }
         }
-
         mem[j] = q
     }
 
@@ -100,7 +95,7 @@ public enum CutRod {
 //        let prices = [1, 5, 8, 9]
         let prices = [1, 5, 8, 9, 10, 17, 17, 20, 24, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44]
 
-//        let maxRevenue = cutRod(prices, prices.count)
+//        let maxRevenue = cutRodRecursive(prices, prices.count)
 //        let maxRevenue = cutRodTopDown(prices, prices.count)
 //        let maxRevenue = cutRodBottomUp(prices, prices.count)
 //        print("Max revenue: \(maxRevenue)")
