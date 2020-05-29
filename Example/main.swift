@@ -40,7 +40,13 @@ let before = Date().timeIntervalSince1970
 //print("The \(i)th order statistic: \(orderStatisticIter)")
 
 //BinarySearchTree.test()
-RedBlackTree.test()
+//RedBlackTree.test()
+
+CutRod.test()
+
+
+
+
 
 let after = Date().timeIntervalSince1970
 let duration = after - before
