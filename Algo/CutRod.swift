@@ -8,6 +8,9 @@
 
 import Foundation
 
+///
+/// Time O(2^n)
+///
 func cutRodRecursive(_ prices: Array<Int>, _ n: Int) -> Int {
 
     if n == 0 {
@@ -23,6 +26,9 @@ func cutRodRecursive(_ prices: Array<Int>, _ n: Int) -> Int {
     return q
 }
 
+///
+/// Time O(n^2)
+///
 func cutRodTopDown(_ prices: Array<Int>, _ n: Int) -> Int {
 
     var mem = Dictionary<Int,Int>()
@@ -51,6 +57,9 @@ func cutRodTopDownAux(_ prices: Array<Int>, _ n: Int, _ mem: inout Dictionary<In
     return q
 }
 
+///
+/// Time O(n^2)
+///
 func cutRodBottomUp(_ prices: Array<Int>, _ n: Int) -> Int {
 
     var mem = Array<Int>(repeating: 0, count: prices.count+1)
@@ -67,6 +76,9 @@ func cutRodBottomUp(_ prices: Array<Int>, _ n: Int) -> Int {
     return q
 }
 
+///
+/// Time O(n^2)
+///
 func cutRodBottomUpExtended(_ prices: Array<Int>, _ n: Int) -> (Int, Array<Int>) {
 
     var mem = Array<Int>(repeating: 0, count: prices.count+1)

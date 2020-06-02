@@ -42,10 +42,8 @@ let before = Date().timeIntervalSince1970
 //BinarySearchTree.test()
 //RedBlackTree.test()
 
-CutRod.test()
-
-
-
+//CutRod.test()
+LCS.test()
 
 
 let after = Date().timeIntervalSince1970
