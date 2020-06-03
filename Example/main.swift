@@ -43,8 +43,8 @@ let before = Date().timeIntervalSince1970
 //RedBlackTree.test()
 
 //CutRod.test()
-LCS.test()
-
+//LCS.test()
+LMIS.test()
 
 let after = Date().timeIntervalSince1970
 let duration = after - before
