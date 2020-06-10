@@ -23,6 +23,7 @@ func lcsRecursive(_ X: Array<Character>, _ Y: Array<Character>, _ i: Int, _ j: I
 
     let lcs1 = lcsRecursive(X, Y, i-1, j)
     let lcs2 = lcsRecursive(X, Y, i, j-1)
+
     return max(lcs1, lcs2)
 }
 
