@@ -8,31 +8,55 @@
 
 import Foundation
 
+typealias ActivitySelectorTuple = (val: Int, i: Int, j: Int, index: Int)
+typealias ActivitySelectorResult = (val: Int, solution: Array<Int>)
+
 ///
-/// Time exponential?
+/// Time polinomial as we use memoization
 ///
 /// Exercise 16.1-1 in CLRS
 ///
-func activitySelectorDynamicTopDown(_ s: Array<Int>, _ f: Array<Int>) -> (val: Int, i: Int, j: Int) {
+func activitySelectorDynamicTopDown(_ s: Array<Int>, _ f: Array<Int>) -> ActivitySelectorResult {
 
-    var mem = Dictionary<String, (Int,Int,Int)>()
+    var mem = Dictionary<String, ActivitySelectorTuple>()
 
-    let val = activitySelectorDynamicTopDownAux(s, f, 0, s.count-1, &mem)
+    let maxVal = activitySelectorDynamicTopDownAux(s, f, 0, s.count-1, &mem)
 
-    return val
+    print("Val: \(maxVal.val)")
+//    print("Mem:")
+//    for val in mem {
+//        print(val)
+//    }
+
+    // Construct an optimal solution
+    var val = maxVal
+    let j = maxVal.j
+    var arr = Array<Int>()
+    for _ in 0..<maxVal.val {
+        arr.append(val.i)
+        let str = "\(val.index),\(j)"
+        if let tmp = mem[str] {
+            val = tmp
+        }
+        else {
+            break
+        }
+    }
+
+    return (val: maxVal.val, solution: arr)
 }
 
-func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: Int, _ j: Int, _ mem: inout Dictionary<String, (Int,Int,Int)>) -> (val: Int, i: Int, j: Int) {
+func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: Int, _ j: Int, _ mem: inout Dictionary<String, ActivitySelectorTuple>) -> ActivitySelectorTuple {
 
     assert(s.count == f.count)
-    guard !s.isEmpty else { return (0, 0, 0) }
+    guard !s.isEmpty else { return (0, 0, 0, 0) }
 
     if i == j {
-        return (1, i, j)
+        return (1, i, j, 0)
     }
 
     if i > j {
-        return (0, 0, 0)
+        return (0, 0, 0, 0)
     }
 
     if let val = mem["\(i),\(j)"] {
@@ -41,6 +65,8 @@ func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: In
 
     var maxVal = 0, maxI = 0, maxJ = 0
 
+    var maxIndex = 0
+
     for k in i...j {
 
         let left = activitySelectorDynamicTopDownAux(s, f, i, k-1, &mem)
@@ -48,30 +74,37 @@ func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: In
 
         var val = 0, valI = 0, valJ = 0
 
+        var index = 0
+
         if k > i && k < j {
 
             if f[left.j] <= s[right.i] {
 
                 val = left.val + right.val
+                valI = left.i
+                valJ = right.j
+
+                index = left.j
 
                 if (s[k] >= f[left.j]) && (f[k] <= s[right.i]) {
                     val += 1
                 }
-
-                valI = left.i
-                valJ = right.j
             }
             else if left.val > right.val {
 
                 val = left.val
                 valI = left.i
                 valJ = left.j
+
+                index = left.i
             }
             else {
 
                 val = right.val
                 valI = right.i
                 valJ = right.j
+
+                index = right.i
             }
         }
         else if k > i { // k == j
@@ -79,6 +112,8 @@ func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: In
             val = left.val
             valI = left.i
             valJ = left.j
+
+            index = left.i
 
             if f[left.j] <= s[k] {
                 val += 1
@@ -91,6 +126,8 @@ func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: In
             valI = right.i
             valJ = right.j
 
+            index = right.i
+
             if f[k] <= s[right.i] {
                 val += 1
                 valI = k
@@ -101,47 +138,17 @@ func activitySelectorDynamicTopDownAux(_ s: Array<Int>, _ f: Array<Int>, _ i: In
             maxVal = val
             maxI = valI
             maxJ = valJ
+            maxIndex = index
         }
     }
 
-    mem["\(maxI),\(maxJ)"] = (maxVal, maxI, maxJ)
-
-    return (maxVal, maxI, maxJ)
-}
-
-///
-/// Time O(n^2), where n = s.count = f.count
-///
-/// Exercise 16.1-1 in CLRS
-///
-func activitySelectorDynamicBottomUp(_ s: Array<Int>, _ f: Array<Int>) -> Int {
-
-    assert(s.count == f.count)
-    guard !s.isEmpty else { return 0 }
-
-    var mem = Array<Int>(repeating: 0, count: s.count)
-
-    var maxVal = 0
-
-    for i in 1..<s.count {
-
-        maxVal = 0
-
-        for j in 0..<i {
-
-            var val = mem[j]
-
-            if f[j] <= s[i] {
-                val += 1
-            }
-
-            maxVal = max(maxVal, val)
-        }
-
-        mem[i-1] = maxVal
+    // Guard against double setting (maxIndex varies), which seems to happen because we also
+    // consider right subproblem
+    if mem["\(maxI),\(maxJ)"] == nil {
+        mem["\(maxI),\(maxJ)"] = (maxVal, maxI, maxJ, maxIndex)
     }
 
-    return maxVal
+    return mem["\(maxI),\(maxJ)"]!
 }
 
 ///
