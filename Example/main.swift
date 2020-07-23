@@ -45,7 +45,9 @@ let before = Date().timeIntervalSince1970
 //CutRod.test()
 //LCS.test()
 //LMIS.test()
-ActivitySelection.test()
+//ActivitySelection.test()
+
+Graph.test()
 
 let after = Date().timeIntervalSince1970
 let duration = after - before

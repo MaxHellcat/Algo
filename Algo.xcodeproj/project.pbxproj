@@ -12,6 +12,7 @@
 		AE2C84312486B97D00C05DA7 /* LMIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C84302486B97D00C05DA7 /* LMIS.swift */; };
 		AE56B52324852A91006BCDDE /* LCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE56B52224852A91006BCDDE /* LCS.swift */; };
 		AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED0FD60247FE694003FF1F7 /* CutRod.swift */; };
+		AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF855AF24AA51BD007CDD34 /* Graph.swift */; };
 		AEFDA206246321CE0090E449 /* Algo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFDA204246321CE0090E449 /* Algo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20C246321EF0090E449 /* BinarySearchTree.swift */; };
 		AEFDA214246322850090E449 /* RandomizedSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20E246322840090E449 /* RandomizedSelect.swift */; };
@@ -52,6 +53,7 @@
 		AE2C84302486B97D00C05DA7 /* LMIS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMIS.swift; sourceTree = "<group>"; };
 		AE56B52224852A91006BCDDE /* LCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCS.swift; sourceTree = "<group>"; };
 		AED0FD60247FE694003FF1F7 /* CutRod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRod.swift; sourceTree = "<group>"; };
+		AEF855AF24AA51BD007CDD34 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		AEFDA201246321CE0090E449 /* Algo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFDA204246321CE0090E449 /* Algo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algo.h; sourceTree = "<group>"; };
 		AEFDA205246321CE0090E449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				AE56B52224852A91006BCDDE /* LCS.swift */,
 				AE2C84302486B97D00C05DA7 /* LMIS.swift */,
 				AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */,
+				AEF855AF24AA51BD007CDD34 /* Graph.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEFDA215246322850090E449 /* InsertionSort.swift in Sources */,
+				AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */,
 				AE2C84312486B97D00C05DA7 /* LMIS.swift in Sources */,
 				AEFDA218246322850090E449 /* HeapSort.swift in Sources */,
 				AEFDA219246322850090E449 /* QuickSort.swift in Sources */,
