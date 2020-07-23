@@ -10,82 +10,76 @@ import Foundation
 
 public class Graph {
 
-    class Vertex {
-        enum Color {
-            case white, gray, black
-        }
-        let tag: Int
-        var color: Color = .white
-        var distance: Int = 0
-        var parent: Int? = nil
-        init(tag: Int) {
-            self.tag = tag
-        }
+    enum VertexColor {
+        case white, gray, black
     }
 
-    private var adj: Array<(Vertex,Array<Int>)>
+    private var adj: Array<(Int,Array<Int>)>
+
+    var colors: Array<VertexColor>
+    var distances: Array<Int>
+    var parents: Array<Int?>
 
     init(vertices: Array<Int>, edges: Array<(Int,Int)>) {
 
-        adj = vertices.map{(Vertex(tag: $0),[])}
+        colors = Array<VertexColor>(repeating: .white, count: vertices.count)
+        distances = Array<Int>(repeating: 0, count: vertices.count)
+        parents = Array<Int?>(repeating: nil, count: vertices.count)
+
+        adj = vertices.map{($0,[])}
 
         for (u,v) in edges {
-            assert(u-1 >= 0 && u-1 < adj.count)
-            assert(v-1 >= 0 && v-1 < adj.count)
-            adj[u-1].1.append(v)
+            assert(u >= 0 && u < adj.count)
+            assert(v >= 0 && v < adj.count)
+            adj[u].1.append(v)
         }
     }
 
     //
     // Time O(E+V)
     //
-    func breadthFirstSearch(_ sTag: Int) {
+    func breadthFirstSearch(_ s: Int) {
 
-        let s = adj[sTag-1].0
-        s.color = .gray
-        s.distance = 0
-        s.parent = nil
+        colors[s] = .gray
 
         var queue = Array<Int>()
-        queue.append(sTag)
+        queue.append(s)
 
         while !queue.isEmpty {
 
-            let uTag = queue.first!
+            let u = queue.first!
             queue.remove(at: 0)
 
-            let u = adj[uTag-1].0
-
-            for vTag in adj[uTag-1].1 {
-                let v = adj[vTag-1].0
-                if v.color == .white {
-                    v.distance = u.distance + 1
-                    v.parent = u.tag
-                    v.color = .gray
-                    queue.append(v.tag)
+            for v in adj[u].1 {
+                if colors[v] == .white {
+                    distances[v] = distances[u] + 1
+                    parents[v] = u
+                    colors[v] = .gray
+                    queue.append(v)
                 }
             }
 
-            u.color = .black
+            colors[u] = .black
         }
     }
 
     //
     // Time O(path length)
     //
-    func printPath(_ sTag: Int, _ vTag: Int) {
+    func printPath(_ s: Int, _ v: Int) {
 
-        let v = adj[vTag-1].0
+        assert(s >= 0 && s < adj.count)
+        assert(v >= 0 && v < adj.count)
 
-        if vTag == sTag {
-            print(sTag)
+        if v == s {
+            print(s)
         }
-        else if v.parent == nil {
-            print("No path from \(sTag) to \(vTag) exists")
+        else if parents[v] == nil {
+            print("No path from \(s) to \(v) exists")
         }
         else {
-            printPath(sTag, v.parent!)
-            print(vTag)
+            printPath(s, parents[v]!)
+            print(v)
         }
     }
 }
@@ -95,16 +89,9 @@ extension Graph: CustomStringConvertible {
     public var description: String {
         var s = ""
         for (u, vs) in adj {
-            s += "\(u):\(vs)\n"
+            s += "\(u), \(colors[u]):\(vs)\n"
         }
         return s
-    }
-}
-
-extension Graph.Vertex: CustomStringConvertible {
-
-    var description: String {
-        return "\(tag), \(color), d: \(distance), p: \(String(describing: parent))"
     }
 }
 
@@ -112,17 +99,17 @@ extension Graph {
 
     public static func test() {
 
-        let graph = Graph(vertices: [1, 2, 3, 4, 5], edges: [(1,2), (1,4), (2,3), (2,5)])
+        let graph = Graph(vertices: [0, 1, 2, 3, 4], edges: [(0,1), (0,3), (1,2), (1,4)])
 
         print("See graph:")
         print(graph)
 
-        graph.breadthFirstSearch(1)
+        graph.breadthFirstSearch(0)
 
         print("See graph:")
         print(graph)
 
         print("See BFS tree:")
-        graph.printPath(2, 4)
+        graph.printPath(1, 3)
     }
 }
