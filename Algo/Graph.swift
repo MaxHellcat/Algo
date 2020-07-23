@@ -36,7 +36,7 @@ public class Graph {
     }
 
     //
-    // Time O(E+V)
+    // Time O(V + E)
     //
     func breadthFirstSearch(_ s: Int) {
 
@@ -82,6 +82,38 @@ public class Graph {
             print(v)
         }
     }
+
+    //
+    // Time Ø(V + E)
+    //
+    func depthFirstSearch(finals: inout Array<Int>) {
+
+        var time = 0
+
+        func dfsVisit(_ u: Int) {
+
+            time += 1 // white vertex u has just been discovered
+            colors[u] = .gray
+            distances[u] = time
+
+            for v in adj[u].1 { // explore edge (u, v)
+                if colors[v] == .white {
+                    parents[v] = u
+                    dfsVisit(v)
+                }
+            }
+
+            colors[u] = .black // blacken u; it is finished
+            time += 1
+            finals[u] = time
+        }
+
+        for (u,_) in adj {
+            if colors[u] == .white {
+                dfsVisit(u)
+            }
+        }
+    }
 }
 
 extension Graph: CustomStringConvertible {
@@ -99,6 +131,12 @@ extension Graph {
 
     public static func test() {
 
+//        testBFS()
+        testDFS()
+    }
+
+    static func testBFS() {
+
         let graph = Graph(vertices: [0, 1, 2, 3, 4], edges: [(0,1), (0,3), (1,2), (1,4)])
 
         print("See graph:")
@@ -110,6 +148,26 @@ extension Graph {
         print(graph)
 
         print("See BFS tree:")
-        graph.printPath(1, 3)
+        graph.printPath(0, 4)
+    }
+
+    static func testDFS() {
+
+        let graph = Graph(vertices: [0, 1, 2, 3, 4], edges: [(0,1), (0,3), (1,2), (1,4)])
+
+        var finals = Array<Int>(repeating: 0, count: graph.adj.count)
+
+        print("See graph:")
+        print(graph)
+
+        graph.depthFirstSearch(finals: &finals)
+
+        print("See graph:")
+        print(graph)
+
+        print("See ranges:")
+        for i in 0..<graph.adj.count {
+            print("(\(graph.distances[i])/\(finals[i]))")
+        }
     }
 }
