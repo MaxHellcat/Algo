@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Exercise 15.4-5 in CLRS
+///
+/// Note, only value is calculated, not a solution itself.
+
 ///
 /// Time O(2^n), where n = arr.count
 ///
@@ -36,8 +40,6 @@ func lmisRecursive(_ arr: Array<Int>, _ i: Int) -> Int {
 
 ///
 /// Time O(n^2), where n = arr.count
-///
-/// Exercise 15.4-5 in CLRS
 ///
 func lmisBottomUp(_ arr: Array<Int>) -> Int {
 
@@ -72,10 +74,10 @@ public enum LMIS {
 
     public static func test() {
 
-//        let arr = [7, 3, 1, 2, 5, 9, 6, 8, 4] // 1, 2, 5, 6, 8
+        let arr = [7, 3, 1, 2, 5, 9, 6, 8, 4] // 1, 2, 5, 6, 8
 //        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 //        let arr = [9, 8, 7, 3, 5, 4, 6, 2, 1]
-        let arr: Array<Int> = [1, 1, 1, 1, 1]
+//        let arr: Array<Int> = [1, 1, 1, 1, 1]
 //        let arr: Array<Int> = []
 
         let val1 = lmisRecursive(arr, 0)
