@@ -29,7 +29,6 @@ public class BinarySearchTree {
         deinit {
             print("Deinit node \(self)")
         }
-
     }
 
     public var root: Node?

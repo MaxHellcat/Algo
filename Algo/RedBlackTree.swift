@@ -35,7 +35,6 @@ public class RedBlackTree {
         deinit {
             print("Deinit node \(self)")
         }
-
     }
 
     public var root: Node = Node.Nil

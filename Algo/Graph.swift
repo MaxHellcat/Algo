@@ -8,68 +8,104 @@
 
 import Foundation
 
-public class Graph {
+public class Graph<T: Hashable> {
 
-    enum VertexColor {
+    enum VertexColor: CustomStringConvertible { // Not part of a vertex
         case white, gray, black
+        public var description: String {
+            switch self {
+            case .white:
+                return "white"
+            case .gray:
+                return "gray"
+            case .black:
+                return "black"
+            }
+        }
     }
 
-    private var adj: Array<(Int,Array<Int>)>
+    private var adj = [T:[T]]()
 
-    var colors: Array<VertexColor>
-    var distances: Array<Int>
-    var parents: Array<Int?>
+    func addVertex(_ v: T) {
 
-    init(vertices: Array<Int>, edges: Array<(Int,Int)>) {
-
-        colors = Array<VertexColor>(repeating: .white, count: vertices.count)
-        distances = Array<Int>(repeating: 0, count: vertices.count)
-        parents = Array<Int?>(repeating: nil, count: vertices.count)
-
-        adj = vertices.map{($0,[])}
-
-        for (u,v) in edges {
-            assert(u >= 0 && u < adj.count)
-            assert(v >= 0 && v < adj.count)
-            adj[u].1.append(v)
+        guard adj[v] == nil else {
+            assertionFailure("Attempt to add existing vertex")
+            return
         }
+
+        adj[v] = []
+    }
+
+    func addEdge(_ u: T, _ v: T) {
+
+        guard adj[u] != nil && adj[v] != nil else {
+            assertionFailure("Attempt to add edge for missing vertices")
+            return
+        }
+
+        guard !adj[u]!.contains(v) else {
+            assertionFailure("Attempt to add same edge")
+            return
+        }
+
+        adj[u]!.append(v)
     }
 
     //
     // Time O(V + E)
     //
-    func breadthFirstSearch(_ s: Int) {
+    func breadthFirstSearch(_ s: T) -> [T: T?] {
+
+        var colors = [T: VertexColor]()
+        var distances = [T: Int]()
+        var parents = [T: T?]()
+
+        adj.forEach {
+            colors[$0.key] = .white
+            distances[$0.key] = 0
+            parents[$0.key] = nil
+        }
 
         colors[s] = .gray
+        distances[s] = 0
+        parents[s] = nil
 
-        var queue = Array<Int>()
+        var queue = [T]()
         queue.append(s)
 
         while !queue.isEmpty {
 
             let u = queue.first!
-            queue.remove(at: 0)
+            queue.remove(at: 0) // Dequeue
 
-            for v in adj[u].1 {
+            for v in adj[u]! {
                 if colors[v] == .white {
-                    distances[v] = distances[u] + 1
+                    distances[v] = distances[u]! + 1
                     parents[v] = u
                     colors[v] = .gray
-                    queue.append(v)
+                    queue.append(v) // Enqueue
                 }
             }
 
             colors[u] = .black
         }
+
+        print("Colors: \(colors)")
+        print("Distances: \(distances)")
+        print("Parents: \(parents)")
+
+        return parents
     }
 
     //
     // Time O(path length)
     //
-    func printPath(_ s: Int, _ v: Int) {
+    func printPath(_ s: T, _ v: T, _ parents: [T: T?]) {
 
-        assert(s >= 0 && s < adj.count)
-        assert(v >= 0 && v < adj.count)
+        guard adj[s] != nil && adj[v] != nil else {
+            assertionFailure("Attempt to print path for missing vertices")
+            return
+        }
 
         if v == s {
             print(s)
@@ -78,7 +114,7 @@ public class Graph {
             print("No path from \(s) to \(v) exists")
         }
         else {
-            printPath(s, parents[v]!)
+            printPath(s, (parents[v]!)!, parents)
             print(v)
         }
     }
@@ -86,17 +122,28 @@ public class Graph {
     //
     // Time Ø(V + E)
     //
-    func depthFirstSearch(finals: inout Array<Int>) {
+    // topologicalList - populated with finished vertices as DFS proceeds
+    func depthFirstSearch(topologicalList: inout [T]) {
+
+        var colors = [T: VertexColor]()
+        var discovers = [T: Int]()
+        var finishes = [T: Int]()
+        var parents = [T: T?]()
+
+        adj.forEach {
+            colors[$0.key] = .white
+            parents[$0.key] = nil
+        }
 
         var time = 0
 
-        func dfsVisit(_ u: Int) {
+        func dfsVisit(_ u: T) {
 
             time += 1 // white vertex u has just been discovered
+            discovers[u] = time
             colors[u] = .gray
-            distances[u] = time
 
-            for v in adj[u].1 { // explore edge (u, v)
+            for v in adj[u]! { // explore edge (u, v)
                 if colors[v] == .white {
                     parents[v] = u
                     dfsVisit(v)
@@ -105,7 +152,8 @@ public class Graph {
 
             colors[u] = .black // blacken u; it is finished
             time += 1
-            finals[u] = time
+            finishes[u] = time
+            topologicalList.insert(u, at: 0)
         }
 
         for (u,_) in adj {
@@ -113,6 +161,23 @@ public class Graph {
                 dfsVisit(u)
             }
         }
+
+        print("Colors: \(colors)")
+        print("Discovers: \(discovers)")
+        print("Finishes: \(finishes)")
+        print("Parents: \(parents)")
+    }
+
+    //
+    // Time Ø(V + E)
+    //
+    public func topologicalSort() -> [T] {
+
+        var list = [T]()
+
+        depthFirstSearch(topologicalList: &list)
+
+        return list
     }
 }
 
@@ -121,53 +186,103 @@ extension Graph: CustomStringConvertible {
     public var description: String {
         var s = ""
         for (u, vs) in adj {
-            s += "\(u), \(colors[u]):\(vs)\n"
+            s += "\(u): \(vs)\n"
         }
         return s
     }
 }
 
-extension Graph {
+public enum GraphTests {
 
     public static func test() {
 
 //        testBFS()
-        testDFS()
+//        testDFS()
+        testTopologicalSort()
+    }
+
+    static func testTopologicalSort() {
+
+        let g = Graph<String>()
+        g.addVertex("undershorts")
+        g.addVertex("socks")
+        g.addVertex("watch")
+        g.addVertex("pants")
+        g.addVertex("shoes")
+        g.addVertex("belt")
+        g.addVertex("shirt")
+        g.addVertex("tie")
+        g.addVertex("jacket")
+        g.addEdge("undershorts", "pants")
+        g.addEdge("undershorts", "shoes")
+        g.addEdge("socks", "shoes")
+        g.addEdge("pants", "belt")
+        g.addEdge("pants", "shoes")
+        g.addEdge("belt", "jacket")
+        g.addEdge("shirt", "belt")
+        g.addEdge("shirt", "tie")
+        g.addEdge("tie", "jacket")
+
+        print("See graph:")
+        print(g)
+
+        let list = g.topologicalSort()
+
+        print("See list:")
+        print(list)
     }
 
     static func testBFS() {
 
-        let graph = Graph(vertices: [0, 1, 2, 3, 4], edges: [(0,1), (0,3), (1,2), (1,4)])
+        let g = Graph<Int>()
+        g.addVertex(1)
+        g.addVertex(3)
+        g.addVertex(5)
+        g.addVertex(7)
+        g.addVertex(9)
+        g.addEdge(3, 1)
+        g.addEdge(3, 5)
+        g.addEdge(3, 7)
+        g.addEdge(3, 9)
+        g.addEdge(1, 7)
 
         print("See graph:")
-        print(graph)
+        print(g)
 
-        graph.breadthFirstSearch(0)
+        let parents = g.breadthFirstSearch(3)
 
         print("See graph:")
-        print(graph)
+        print(g)
 
-        print("See BFS tree:")
-        graph.printPath(0, 4)
+        print("See the shortest path between vertices:")
+        g.printPath(3, 7, parents)
     }
 
     static func testDFS() {
 
-        let graph = Graph(vertices: [0, 1, 2, 3, 4], edges: [(0,1), (0,3), (1,2), (1,4)])
-
-        var finals = Array<Int>(repeating: 0, count: graph.adj.count)
+        let g = Graph<Character>()
+        g.addVertex("u")
+        g.addVertex("v")
+        g.addVertex("w")
+        g.addVertex("x")
+        g.addVertex("y")
+        g.addVertex("z")
+        g.addEdge("u", "v")
+        g.addEdge("u", "x")
+        g.addEdge("v", "y")
+        g.addEdge("w", "y")
+        g.addEdge("w", "z")
+        g.addEdge("x", "v")
+        g.addEdge("y", "x")
+        g.addEdge("z", "z")
 
         print("See graph:")
-        print(graph)
+        print(g)
 
-        graph.depthFirstSearch(finals: &finals)
+        var topologicalListThatMustNotBeHere = [Character]()
+        g.depthFirstSearch(topologicalList: &topologicalListThatMustNotBeHere)
 
         print("See graph:")
-        print(graph)
-
-        print("See ranges:")
-        for i in 0..<graph.adj.count {
-            print("(\(graph.distances[i])/\(finals[i]))")
-        }
+        print(g)
     }
 }
