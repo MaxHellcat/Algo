@@ -179,6 +179,64 @@ public class Graph<T: Hashable> {
 
         return list
     }
+
+    // Exercise 22.4-2 CLRS
+    //
+    // Give a linear-time algorithm that takes as input a directed acyclic graph G = (V,E) and two vertices s and t, and returns the number of simple paths from s to t in G.
+    //
+    // Solution: The idea is to use a modified DFS that marks discovered vertices that lead to t, to keep linear running time.
+    // Time O(V+E), space O(V)
+    public func simplePathCount(_ s: T, _ t: T) -> Int {
+
+        // Strictly speaking there's a 0-path for s == t, but exercise example seems to ignore it.
+        guard s != t else {
+            return 0
+        }
+
+        var discovered = [T: Bool]() // Vertices that have been visited (not necessarily finished)
+        var included = [T: Bool]() // Vertices that are in some path to t
+
+        adj.forEach {
+            discovered[$0.key] = false
+            included[$0.key] = false
+        }
+
+        var result = 0
+
+        func visit(_ u: T) {
+
+            discovered[u] = true
+
+            print("Visit \(u)")
+
+            guard u != t else { // Stop once we reach t
+                included[u] = true
+                result = 1
+                return
+            }
+
+            print("Iterate: \(adj[u]!)")
+            for v in adj[u]! { // explore edge (u, v)
+                print("\(v) discovered: \(discovered[v]!), leads: \(included[v]!)")
+                if discovered[v] == false {
+                    visit(v)
+                }
+                else // Stop once we reach discovered vertice that leads to t
+                if included[v] == true {
+                    result += 1
+                }
+
+                // If at least one edge uv leads to t, mark u so it also leads
+                if included[v] == true {
+                    included[u] = true
+                }
+            }
+        }
+
+        visit(s)
+
+        return result
+    }
 }
 
 extension Graph: CustomStringConvertible {
@@ -198,7 +256,34 @@ public enum GraphTests {
 
 //        testBFS()
 //        testDFS()
-        testTopologicalSort()
+//        testTopologicalSort()
+        testSimplePathCount()
+    }
+
+    static func testSimplePathCount() {
+
+        let g = Graph<Character>()
+        g.addVertex("p")
+        g.addVertex("o")
+        g.addVertex("s")
+        g.addVertex("r")
+        g.addVertex("y")
+        g.addVertex("v")
+
+        g.addEdge("p", "o")
+        g.addEdge("p", "s") //
+        g.addEdge("o", "r")
+        g.addEdge("o", "v")
+        g.addEdge("o", "s") //
+        g.addEdge("r", "y")
+        g.addEdge("s", "r")
+        g.addEdge("y", "v")
+
+        print("\(g)")
+
+        let val = g.simplePathCount("p", "v")
+
+        print("Count: \(val)")
     }
 
     static func testTopologicalSort() {
