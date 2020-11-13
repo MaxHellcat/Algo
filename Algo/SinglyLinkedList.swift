@@ -8,14 +8,14 @@
 
 import Foundation
 
-class SinglyLinkedList {
+public class SinglyLinkedList<T: Comparable> {
 
     class Node {
 
-        let key: Int
+        let key: T
         var next: Node?
 
-        init(key: Int) {
+        init(key: T) {
             self.key = key
         }
 
@@ -30,46 +30,34 @@ class SinglyLinkedList {
 
     private(set) var head: Node?
 
-    // Push back if atNode is nil
-    func insert(node: Node, atNode: Node?) {
+    func insertFirst(node: Node) {
 
-        precondition(true, "The atNode must be in the list")
+        precondition(true, "The node must not be in the list")
 
-        if atNode === head { // Nil head is also caught here
-
-            node.next = head
-            head = node
-        }
-        else if let prevNode = searchPrev(node: atNode) {
-
-            node.next = prevNode.next
-            prevNode.next = node
-        }
-        else {
-
-            preconditionFailure("The atNode must be in the list")
-        }
+        node.next = head
+        head = node
     }
 
     func remove(node: Node) {
 
-        precondition(true, "The node must be in the list")
-
         if node === head {
-
             head = node.next
+            return
         }
-        else if let prevNode = searchPrev(node: node) {
 
-            prevNode.next = node.next
+        var prevNode: Node? = nil
+        var inode = head
+        while inode != nil && inode !== node {
+            prevNode = inode
+            inode = inode!.next
         }
-        else {
 
-            preconditionFailure("The node must be in the list")
+        if inode != nil && prevNode != nil {
+            prevNode!.next = node.next
         }
     }
 
-    func search(key: Int) -> Node? {
+    func search(key: T) -> Node? {
 
         var node = head
 
@@ -79,23 +67,11 @@ class SinglyLinkedList {
 
         return node
     }
-
-    // Returns tail if passed node is nil
-    private func searchPrev(node: Node?) -> Node? {
-
-        var prevNode = head
-
-        while prevNode != nil && prevNode!.next !== node {
-            prevNode = prevNode!.next
-        }
-
-        return prevNode
-    }
 }
 
 extension SinglyLinkedList: CustomStringConvertible {
 
-    var description: String {
+    public var description: String {
 
         var s = "["
 
@@ -116,33 +92,30 @@ extension SinglyLinkedList: CustomStringConvertible {
 extension SinglyLinkedList.Node: CustomStringConvertible {
 
     var description: String {
-        return "(key: \(key))"
+        return "\(key)"
     }
 }
 
-extension SinglyLinkedList {
+public enum TestSinglyLinkedList {
 
-    class func test() {
+    public static func test() {
 
-        let list = SinglyLinkedList()
+        let list = SinglyLinkedList<Int>()
 
         for i in 1...10 {
-            list.insert(node: SinglyLinkedList.Node(key: i), atNode: nil)
+            list.insertFirst(node: SinglyLinkedList<Int>.Node(key: i))
         }
         print("List: \(list)")
 
         let key = 7
         print("Search node \(key)")
-        weak var node = list.search(key: key)
-        print("Found node: \(String(describing: node))")
+        let findNode = list.search(key: key)
+        print("Found node: \(String(describing: findNode))")
 
-        let newNode = SinglyLinkedList.Node(key: 25)
-        print("Insert node \(newNode) at \(String(describing: node))")
-        list.insert(node: newNode, atNode: node)
-        print("List: \(list)")
-
-        print("Remove node \(newNode)")
-        list.remove(node: newNode)
+        let removeNode = list.search(key: 8)!
+//        let removeNode = SinglyLinkedList<Int>.Node(key: 15)
+        print("Remove node \(removeNode)")
+        list.remove(node: removeNode)
         print("List: \(list)")
     }
 }
