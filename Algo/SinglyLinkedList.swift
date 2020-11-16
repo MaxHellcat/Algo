@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SinglyLinkedList<T: Comparable> {
+class SinglyLinkedList<T: Comparable> {
 
     class Node {
 
@@ -52,7 +52,9 @@ public class SinglyLinkedList<T: Comparable> {
             inode = inode!.next
         }
 
-        if inode != nil && prevNode != nil {
+//        assert(inode != nil, "Node to remove is not in the list!")
+
+        if prevNode != nil {
             prevNode!.next = node.next
         }
     }
@@ -71,19 +73,22 @@ public class SinglyLinkedList<T: Comparable> {
 
 extension SinglyLinkedList: CustomStringConvertible {
 
-    public var description: String {
+    var description: String {
 
         var s = "["
 
         var node = head
-        while node?.next != nil {
-            s += "\(node!.key), "
-            node = node?.next
+        var prev: Node? = nil
+        while node != nil {
+            if prev != nil {
+                s += ", "
+            }
+            s += "\(node!.key)"
+            node = node!.next
+            prev = node
         }
 
-        if let node = node {
-            s += "\(node.key)]"
-        }
+        s += "]"
 
         return s
     }
@@ -98,7 +103,18 @@ extension SinglyLinkedList.Node: CustomStringConvertible {
 
 public enum TestSinglyLinkedList {
 
-    public static func test() {
+    static func testInsertFirst() {
+
+        let list = SinglyLinkedList<Int>()
+        print("List: \(list)")
+
+        for i in 1...10 {
+            list.insertFirst(node: SinglyLinkedList<Int>.Node(key: i))
+        }
+        print("List: \(list)")
+    }
+
+    static func testSearch() {
 
         let list = SinglyLinkedList<Int>()
 
@@ -107,15 +123,49 @@ public enum TestSinglyLinkedList {
         }
         print("List: \(list)")
 
-        let key = 7
-        print("Search node \(key)")
-        let findNode = list.search(key: key)
-        print("Found node: \(String(describing: findNode))")
+        var key = 1837
+        print("Search missing node \(key)")
+        print("Found: \(String(describing: list.search(key: key)))")
 
-        let removeNode = list.search(key: 8)!
-//        let removeNode = SinglyLinkedList<Int>.Node(key: 15)
-        print("Remove node \(removeNode)")
-        list.remove(node: removeNode)
+        key = 7
+        print("Search existing node \(key)")
+        print("Found: \(String(describing: list.search(key: key)))")
+    }
+
+    static func testRemoveNode() {
+
+        let list = SinglyLinkedList<Int>()
+
+        for i in 1...10 {
+            list.insertFirst(node: SinglyLinkedList<Int>.Node(key: i))
+        }
         print("List: \(list)")
+
+        var node = list.search(key: 10)!
+        print("Remove head node \(node)")
+        list.remove(node: node)
+        print("List: \(list)")
+
+        node = list.search(key: 6)!
+        print("Remove middle node \(node)")
+        list.remove(node: node)
+        print("List: \(list)")
+
+        node = list.search(key: 1)!
+        print("Remove tail node \(node)")
+        list.remove(node: node)
+        print("List: \(list)")
+
+        node = SinglyLinkedList<Int>.Node(key: 55)
+        print("Remove missing node \(node)")
+        list.remove(node: node)
+        print("List: \(list)")
+    }
+
+    public static func test() {
+
+        testInsertFirst()
+        testSearch()
+        testRemoveNode()
     }
 }
