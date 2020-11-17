@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Add notion of undirected graph so reverse edges are automatically added, see testConnectedComponents
 public class Graph<T: Hashable> {
 
     enum VertexColor: CustomStringConvertible { // Not part of a vertex
@@ -24,7 +25,7 @@ public class Graph<T: Hashable> {
         }
     }
 
-    private var adj = [T:[T]]()
+    private(set) var adj = [T:[T]]()
 
     func addVertex(_ v: T) {
 
@@ -239,6 +240,26 @@ public class Graph<T: Hashable> {
     }
 }
 
+public func ConnectedComponents<T: Hashable>(graph g: Graph<T>) {
+
+    let set = DisjointSet<T>()
+
+    for v in g.adj.keys {
+        set.makeSet(x: v)
+    }
+    print("Initial set: \(set)")
+
+    for (u, vs) in g.adj {
+        for v in vs { // For each edge
+            if set.findSet(x: u) !== set.findSet(x: v) {
+                set.union(x: u, y: v)
+            }
+        }
+    }
+
+    print("Result set: \(set)")
+}
+
 extension Graph: CustomStringConvertible {
 
     public var description: String {
@@ -252,12 +273,50 @@ extension Graph: CustomStringConvertible {
 
 public enum GraphTests {
 
-    public static func test() {
+    public static func testAll() {
 
 //        testBFS()
 //        testDFS()
 //        testTopologicalSort()
-        testSimplePathCount()
+//        testSimplePathCount()
+        testConnectedComponents()
+    }
+
+    static func testConnectedComponents() {
+
+        // Figure 21.1 CLRS
+        let g = Graph<Character>()
+        g.addVertex("a")
+        g.addVertex("b")
+        g.addVertex("c")
+        g.addVertex("d")
+        g.addEdge("a", "b")
+        g.addEdge("b", "a") // backward
+        g.addEdge("a", "c")
+        g.addEdge("c", "a") // backward
+        g.addEdge("b", "c")
+        g.addEdge("c", "b") // backward
+        g.addEdge("b", "d")
+        g.addEdge("d", "b") // backward
+
+        g.addVertex("e")
+        g.addVertex("f")
+        g.addVertex("g")
+        g.addEdge("e", "f")
+        g.addEdge("f", "e") // backward
+        g.addEdge("e", "g")
+        g.addEdge("g", "e") // backward
+
+        g.addVertex("h")
+        g.addVertex("i")
+        g.addEdge("h", "i")
+        g.addEdge("i", "h") // backward
+
+        g.addVertex("j")
+
+        print("Graph:\n\(g)")
+
+        ConnectedComponents(graph: g)
     }
 
     static func testSimplePathCount() {

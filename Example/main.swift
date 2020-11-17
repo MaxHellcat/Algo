@@ -50,7 +50,9 @@ let before = Date().timeIntervalSince1970
 //GraphTests.test()
 
 //TestSinglyLinkedList.test()
-TestDisjointSet.testAll()
+//TestDisjointSet.testAll()
+
+GraphTests.testAll()
 
 let after = Date().timeIntervalSince1970
 let duration = after - before
