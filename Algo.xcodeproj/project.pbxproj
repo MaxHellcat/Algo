@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE17AFA62562C21300E03A07 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE17AFA52562C21300E03A07 /* DisjointSet.swift */; };
 		AE2BF1E6247514F00090F575 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2BF1E5247514F00090F575 /* main.swift */; };
 		AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2BF21E2475673A0090F575 /* RedBlackTree.swift */; };
 		AE2C84312486B97D00C05DA7 /* LMIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C84302486B97D00C05DA7 /* LMIS.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AE17AFA52562C21300E03A07 /* DisjointSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSet.swift; sourceTree = "<group>"; };
 		AE2BF1E3247514F00090F575 /* Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Example; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE2BF1E5247514F00090F575 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		AE2BF21E2475673A0090F575 /* RedBlackTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBlackTree.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				AE2C84302486B97D00C05DA7 /* LMIS.swift */,
 				AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */,
 				AEF855AF24AA51BD007CDD34 /* Graph.swift */,
+				AE17AFA52562C21300E03A07 /* DisjointSet.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -250,6 +253,7 @@
 				AEFDA218246322850090E449 /* HeapSort.swift in Sources */,
 				AEFDA219246322850090E449 /* QuickSort.swift in Sources */,
 				AEFDA214246322850090E449 /* RandomizedSelect.swift in Sources */,
+				AE17AFA62562C21300E03A07 /* DisjointSet.swift in Sources */,
 				AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,

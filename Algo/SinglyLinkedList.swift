@@ -11,14 +11,11 @@ import Foundation
 class SinglyLinkedList<T: Comparable> {
 
     class Node {
-
         let key: T
         var next: Node?
-
         init(key: T) {
             self.key = key
         }
-
         deinit {
             print("Deinit node \(self)")
         }
@@ -74,9 +71,7 @@ class SinglyLinkedList<T: Comparable> {
 extension SinglyLinkedList: CustomStringConvertible {
 
     var description: String {
-
         var s = "["
-
         var node = head
         var prev: Node? = nil
         while node != nil {
@@ -87,9 +82,7 @@ extension SinglyLinkedList: CustomStringConvertible {
             node = node!.next
             prev = node
         }
-
         s += "]"
-
         return s
     }
 }
