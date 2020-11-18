@@ -11,6 +11,10 @@ import Foundation
 // TODO: Add notion of undirected graph so reverse edges are automatically added, see testConnectedComponents
 public class Graph<T: Hashable> {
 
+    public enum Kind {
+        case directed, undirected
+    }
+
     enum VertexColor: CustomStringConvertible { // Not part of a vertex
         case white, gray, black
         public var description: String {
@@ -25,31 +29,38 @@ public class Graph<T: Hashable> {
         }
     }
 
-    private(set) var adj = [T:[T]]()
+    private(set) var adj = [T:[(v: T, w: Int)]]()
+    private let kind: Kind
+
+    init(kind: Kind = .directed) {
+        self.kind = kind
+    }
 
     func addVertex(_ v: T) {
 
-        guard adj[v] == nil else {
-            assertionFailure("Attempt to add existing vertex")
-            return
-        }
-
+        assert(adj[v] == nil, "Attempt to add existing vertex \(v)")
         adj[v] = []
     }
 
-    func addEdge(_ u: T, _ v: T) {
+    func addVertices(_ vs: [T]) {
 
-        guard adj[u] != nil && adj[v] != nil else {
-            assertionFailure("Attempt to add edge for missing vertices")
-            return
+        vs.forEach{
+            assert(adj[$0] == nil, "Attempt to add existing vertex \($0)")
+            adj[$0] = []
         }
+    }
 
-        guard !adj[u]!.contains(v) else {
-            assertionFailure("Attempt to add same edge")
-            return
+    func addEdge(_ u: T, _ v: T, _ w: Int = 0) {
+
+        assert(adj[u] != nil, "Attempt to add edge for missing vertex")
+        assert(!adj[u]!.contains(where: {$0.v == v}), "Attempt to add same edge")
+        adj[u]!.append((v: v, w: w))
+
+        if kind == .undirected {
+            assert(adj[v] != nil, "Attempt to add edge for missing vertex")
+            assert(!adj[v]!.contains(where: {$0.v == u}), "Attempt to add same edge")
+            adj[v]!.append((v: u, w: w))
         }
-
-        adj[u]!.append(v)
     }
 
     //
@@ -79,7 +90,7 @@ public class Graph<T: Hashable> {
             let u = queue.first!
             queue.remove(at: 0) // Dequeue
 
-            for v in adj[u]! {
+            for (v,_) in adj[u]! {
                 if colors[v] == .white {
                     distances[v] = distances[u]! + 1
                     parents[v] = u
@@ -144,7 +155,7 @@ public class Graph<T: Hashable> {
             discovers[u] = time
             colors[u] = .gray
 
-            for v in adj[u]! { // explore edge (u, v)
+            for (v,_) in adj[u]! { // explore edge (u, v)
                 if colors[v] == .white {
                     parents[v] = u
                     dfsVisit(v)
@@ -217,7 +228,7 @@ public class Graph<T: Hashable> {
             }
 
             print("Iterate: \(adj[u]!)")
-            for v in adj[u]! { // explore edge (u, v)
+            for (v,_) in adj[u]! { // explore edge (u, v)
                 print("\(v) discovered: \(discovered[v]!), leads: \(included[v]!)")
                 if discovered[v] == false {
                     visit(v)
@@ -243,14 +254,13 @@ public class Graph<T: Hashable> {
 public func ConnectedComponents<T: Hashable>(graph g: Graph<T>) {
 
     let set = DisjointSet<T>()
-
     for v in g.adj.keys {
         set.makeSet(x: v)
     }
     print("Initial set: \(set)")
 
     for (u, vs) in g.adj {
-        for v in vs { // For each edge
+        for (v,_) in vs { // For each edge
             if set.findSet(x: u) !== set.findSet(x: v) {
                 set.union(x: u, y: v)
             }
@@ -258,6 +268,39 @@ public func ConnectedComponents<T: Hashable>(graph g: Graph<T>) {
     }
 
     print("Result set: \(set)")
+}
+
+// In Kruskal’s algorithm, the set A is a forest whose vertices are
+// all those of the given graph. The safe edge added to A is always a least-weight
+// edge in the graph that connects two distinct components.
+// Time O(E*lgV) (canonical, assuming sorting O(E*lgE) and union O(alpha(V)) amortized)
+func MinimumSpanningTree_Kruskal<T: Hashable>(graph g: Graph<T>) -> [(u: T, v: T, w: Int)] {
+
+    let set = DisjointSet<T>()
+    for v in g.adj.keys {
+        set.makeSet(x: v)
+    }
+//    print("Initial set: \(set)")
+
+    var edges = [(u: T, v: T, w: Int)]()
+    for (u, vs) in g.adj {
+        for (v,w) in vs { // For each edge
+            edges.append((u: u, v: v, w: w))
+        }
+    }
+    edges.sort(by: {$0.w < $1.w})
+//    print("Sorted edges: \(edges)")
+
+    var resultEdges = [(u: T, v: T, w: Int)]() // A
+    for edge in edges {
+        if set.findSet(x: edge.u) !== set.findSet(x: edge.v) {
+            set.union(x: edge.u, y: edge.v)
+            resultEdges.append(edge)
+        }
+    }
+//    print("Final set: \(set)")
+
+    return resultEdges
 }
 
 extension Graph: CustomStringConvertible {
@@ -279,38 +322,64 @@ public enum GraphTests {
 //        testDFS()
 //        testTopologicalSort()
 //        testSimplePathCount()
-        testConnectedComponents()
+//        testConnectedComponents()
+        testMinimumSpanningTree_Kruskal()
+    }
+
+    static func testMinimumSpanningTree_Kruskal() {
+
+        // Figure 23.1 CLRS
+        let g = Graph<Character>(kind: .undirected)
+        g.addVertices(["a", "b", "c", "d", "e", "f", "g", "h", "i"])
+        g.addEdge("a", "b", 4)
+        g.addEdge("a", "h", 8)
+        g.addEdge("b", "c", 8)
+        g.addEdge("b", "h", 11)
+        g.addEdge("c", "d", 7)
+        g.addEdge("c", "f", 4)
+        g.addEdge("c", "i", 2)
+        g.addEdge("d", "e", 9)
+        g.addEdge("d", "f", 14)
+        g.addEdge("e", "f", 10)
+        g.addEdge("f", "g", 2)
+        g.addEdge("g", "h", 1)
+        g.addEdge("g", "i", 6)
+        g.addEdge("h", "i", 7)
+        print("Graph: \n\(g)")
+
+        let edges = MinimumSpanningTree_Kruskal(graph: g)
+        let sum = edges.reduce(0){$0 + $1.w}
+
+        print("MST edges: \(edges), count: \(edges.count), sum: \(sum)")
+
+        assert(edges.count == g.adj.count-1) // |G.V|-1
+        assert(sum == 37) // The total weight of the tree shown is 37.
+
+//    edges.reduce(0, {(left, right) in left.w+right.w})
     }
 
     static func testConnectedComponents() {
 
         // Figure 21.1 CLRS
-        let g = Graph<Character>()
+        let g = Graph<Character>(kind: .undirected)
         g.addVertex("a")
         g.addVertex("b")
         g.addVertex("c")
         g.addVertex("d")
         g.addEdge("a", "b")
-        g.addEdge("b", "a") // backward
         g.addEdge("a", "c")
-        g.addEdge("c", "a") // backward
         g.addEdge("b", "c")
-        g.addEdge("c", "b") // backward
         g.addEdge("b", "d")
-        g.addEdge("d", "b") // backward
 
         g.addVertex("e")
         g.addVertex("f")
         g.addVertex("g")
         g.addEdge("e", "f")
-        g.addEdge("f", "e") // backward
         g.addEdge("e", "g")
-        g.addEdge("g", "e") // backward
 
         g.addVertex("h")
         g.addVertex("i")
         g.addEdge("h", "i")
-        g.addEdge("i", "h") // backward
 
         g.addVertex("j")
 
