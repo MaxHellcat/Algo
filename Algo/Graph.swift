@@ -249,13 +249,14 @@ public enum GraphTests {
 
     public static func testAll() {
 
-        BFSTests.testAll()
-        DFSTests.testAll()
-        testTopologicalSort()
+//        BFSTests.testAll()
+//        DFSTests.testAll()
+//        testTopologicalSort()
 //        testSimplePathCount()
 //        testConnectedComponents()
 //        testMinimumSpanningTree_Kruskal()
 //        testMinimumSpanningTree_Prim()
+        BellmanFordTests.testAll()
     }
 
     static func testMinimumSpanningTree_Prim() {

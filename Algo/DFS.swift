@@ -75,8 +75,7 @@ enum DFSTests {
         g.addEdge("y", "x")
         g.addEdge("z", "z")
 
-        print("See graph:")
-        print(g)
+        print("Graph:\n\(g)")
 
         var topologicalListThatMustNotBeHere = [Character]()
         DFS(g, topologicalList: &topologicalListThatMustNotBeHere)

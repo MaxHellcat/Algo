@@ -109,8 +109,7 @@ enum BFSTests {
         g.addEdge(3, 9)
         g.addEdge(1, 7)
 
-        print("See graph:")
-        print(g)
+        print("Graph:\n\(g)")
 
         let parents = BFS(g, 3)
 
