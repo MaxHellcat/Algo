@@ -12,7 +12,7 @@ typealias ActivitySelectorTuple = (val: Int, i: Int, j: Int, index: Int)
 typealias ActivitySelectorResult = (val: Int, solution: Array<Int>)
 
 ///
-/// Time polinomial as we use memoization
+/// Time polynomial as we use memoization
 ///
 /// Exercise 16.1-1 in CLRS
 ///

@@ -12,6 +12,9 @@
 		AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2BF21E2475673A0090F575 /* RedBlackTree.swift */; };
 		AE2C84312486B97D00C05DA7 /* LMIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C84302486B97D00C05DA7 /* LMIS.swift */; };
 		AE56B52324852A91006BCDDE /* LCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE56B52224852A91006BCDDE /* LCS.swift */; };
+		AE86B947256681710076597E /* BinaryHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE86B946256681710076597E /* BinaryHeap.swift */; };
+		AEB5DD582577A9AA003FF652 /* BFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD572577A9AA003FF652 /* BFS.swift */; };
+		AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD682577C0C2003FF652 /* DFS.swift */; };
 		AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED0FD60247FE694003FF1F7 /* CutRod.swift */; };
 		AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF855AF24AA51BD007CDD34 /* Graph.swift */; };
 		AEFDA206246321CE0090E449 /* Algo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFDA204246321CE0090E449 /* Algo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +57,9 @@
 		AE2BF21E2475673A0090F575 /* RedBlackTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBlackTree.swift; sourceTree = "<group>"; };
 		AE2C84302486B97D00C05DA7 /* LMIS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMIS.swift; sourceTree = "<group>"; };
 		AE56B52224852A91006BCDDE /* LCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCS.swift; sourceTree = "<group>"; };
+		AE86B946256681710076597E /* BinaryHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHeap.swift; sourceTree = "<group>"; };
+		AEB5DD572577A9AA003FF652 /* BFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFS.swift; sourceTree = "<group>"; };
+		AEB5DD682577C0C2003FF652 /* DFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFS.swift; sourceTree = "<group>"; };
 		AED0FD60247FE694003FF1F7 /* CutRod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRod.swift; sourceTree = "<group>"; };
 		AEF855AF24AA51BD007CDD34 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		AEFDA201246321CE0090E449 /* Algo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +135,10 @@
 				AE2C84302486B97D00C05DA7 /* LMIS.swift */,
 				AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */,
 				AEF855AF24AA51BD007CDD34 /* Graph.swift */,
+				AEB5DD572577A9AA003FF652 /* BFS.swift */,
+				AEB5DD682577C0C2003FF652 /* DFS.swift */,
 				AE17AFA52562C21300E03A07 /* DisjointSet.swift */,
+				AE86B946256681710076597E /* BinaryHeap.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -256,11 +265,14 @@
 				AE17AFA62562C21300E03A07 /* DisjointSet.swift in Sources */,
 				AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
+				AE86B947256681710076597E /* BinaryHeap.swift in Sources */,
+				AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,
 				AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */,
 				AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */,
 				AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */,
 				AEFDA217246322850090E449 /* MergeSort.swift in Sources */,
+				AEB5DD582577A9AA003FF652 /* BFS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

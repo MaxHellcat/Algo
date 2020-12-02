@@ -97,19 +97,18 @@ extension DisjointSet: CustomStringConvertible {
 extension DisjointSet.List: CustomStringConvertible {
 
     var description: String {
-        var s = "["
+        var result = "["
         var node = head
         var prev: Node? = nil
         while node != nil {
             if prev != nil {
-                s += ", "
+                result += ", "
             }
-            s += "\(node!.key)"
+            result += "\(node!.key)"
             node = node!.next
             prev = node
         }
-        s += "]"
-        return s
+        return result + "]"
     }
 }
 

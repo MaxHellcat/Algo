@@ -8,32 +8,17 @@
 
 import Foundation
 
-// TODO: Add notion of undirected graph so reverse edges are automatically added, see testConnectedComponents
 public class Graph<T: Hashable> {
 
-    public enum Kind {
+    public enum DirectionType {
         case directed, undirected
     }
 
-    enum VertexColor: CustomStringConvertible { // Not part of a vertex
-        case white, gray, black
-        public var description: String {
-            switch self {
-            case .white:
-                return "white"
-            case .gray:
-                return "gray"
-            case .black:
-                return "black"
-            }
-        }
-    }
-
     private(set) var adj = [T:[(v: T, w: Int)]]()
-    private let kind: Kind
+    private let type: DirectionType
 
-    init(kind: Kind = .directed) {
-        self.kind = kind
+    init(type: DirectionType) {
+        self.type = type
     }
 
     func addVertex(_ v: T) {
@@ -56,128 +41,11 @@ public class Graph<T: Hashable> {
         assert(!adj[u]!.contains(where: {$0.v == v}), "Attempt to add same edge")
         adj[u]!.append((v: v, w: w))
 
-        if kind == .undirected {
+        if type == .undirected {
             assert(adj[v] != nil, "Attempt to add edge for missing vertex")
             assert(!adj[v]!.contains(where: {$0.v == u}), "Attempt to add same edge")
             adj[v]!.append((v: u, w: w))
         }
-    }
-
-    //
-    // Time O(V + E)
-    //
-    func breadthFirstSearch(_ s: T) -> [T: T?] {
-
-        var colors = [T: VertexColor]()
-        var distances = [T: Int]()
-        var parents = [T: T?]()
-
-        adj.forEach {
-            colors[$0.key] = .white
-            distances[$0.key] = 0
-            parents[$0.key] = nil
-        }
-
-        colors[s] = .gray
-        distances[s] = 0
-        parents[s] = nil
-
-        var queue = [T]()
-        queue.append(s)
-
-        while !queue.isEmpty {
-
-            let u = queue.first!
-            queue.remove(at: 0) // Dequeue
-
-            for (v,_) in adj[u]! {
-                if colors[v] == .white {
-                    distances[v] = distances[u]! + 1
-                    parents[v] = u
-                    colors[v] = .gray
-                    queue.append(v) // Enqueue
-                }
-            }
-
-            colors[u] = .black
-        }
-
-        print("Colors: \(colors)")
-        print("Distances: \(distances)")
-        print("Parents: \(parents)")
-
-        return parents
-    }
-
-    //
-    // Time O(path length)
-    //
-    func printPath(_ s: T, _ v: T, _ parents: [T: T?]) {
-
-        guard adj[s] != nil && adj[v] != nil else {
-            assertionFailure("Attempt to print path for missing vertices")
-            return
-        }
-
-        if v == s {
-            print(s)
-        }
-        else if parents[v] == nil {
-            print("No path from \(s) to \(v) exists")
-        }
-        else {
-            printPath(s, (parents[v]!)!, parents)
-            print(v)
-        }
-    }
-
-    //
-    // Time Ø(V + E)
-    //
-    // topologicalList - populated with finished vertices as DFS proceeds
-    func depthFirstSearch(topologicalList: inout [T]) {
-
-        var colors = [T: VertexColor]()
-        var discovers = [T: Int]()
-        var finishes = [T: Int]()
-        var parents = [T: T?]()
-
-        adj.forEach {
-            colors[$0.key] = .white
-            parents[$0.key] = nil
-        }
-
-        var time = 0
-
-        func dfsVisit(_ u: T) {
-
-            time += 1 // white vertex u has just been discovered
-            discovers[u] = time
-            colors[u] = .gray
-
-            for (v,_) in adj[u]! { // explore edge (u, v)
-                if colors[v] == .white {
-                    parents[v] = u
-                    dfsVisit(v)
-                }
-            }
-
-            colors[u] = .black // blacken u; it is finished
-            time += 1
-            finishes[u] = time
-            topologicalList.insert(u, at: 0)
-        }
-
-        for (u,_) in adj {
-            if colors[u] == .white {
-                dfsVisit(u)
-            }
-        }
-
-        print("Colors: \(colors)")
-        print("Discovers: \(discovers)")
-        print("Finishes: \(finishes)")
-        print("Parents: \(parents)")
     }
 
     //
@@ -187,7 +55,8 @@ public class Graph<T: Hashable> {
 
         var list = [T]()
 
-        depthFirstSearch(topologicalList: &list)
+        // RESTORE
+        DFS(self, topologicalList: &list)
 
         return list
     }
@@ -303,6 +172,68 @@ func MinimumSpanningTree_Kruskal<T: Hashable>(graph g: Graph<T>) -> [(u: T, v: T
     return resultEdges
 }
 
+// TODO: Created for Prim's algorithm
+class V: Keyable, Hashable, CustomStringConvertible {
+    static func == (lhs: V, rhs: V) -> Bool {
+        return lhs.tag == rhs.tag
+    }
+
+    let tag: Character
+    var key = 0
+    init(tag: Character) {
+        self.tag = tag
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(tag)
+    }
+    var description: String {
+        return tag.description
+    }
+}
+
+// In Prim’s algorithm, the
+// set A forms a single tree. The safe edge added to A is always a least-weight edge
+// connecting the tree to a vertex not in the tree.
+// Time: O(V*lgV) as current implementation uses min-heap
+func MinimumSpanningTree_Prim(graph g: Graph<V>, r: V) {
+
+    var parents = [V: V?]()
+    var weights = [V: Int]() // MY
+
+    var inQueues = [V: Bool]()
+    for v in g.adj.keys {
+        v.key = Int.max
+        inQueues[v] = true
+    }
+    r.key = 0
+//    print("InQueues: \(inQueues)")
+
+    let heap = BinaryHeap(type: .min, nodes: Array(g.adj.keys))
+    print("Heap: \(heap)")
+
+    while heap.count > 0 {
+
+        let u = heap.extractMin() as! V
+        inQueues[u] = false
+
+        for (v,w) in g.adj[u]! {
+
+            if inQueues[v] == true && w < v.key {
+                parents[v] = u
+                weights[v] = w // MY
+                heap.decrease(node: v, key: w)
+            }
+        }
+    }
+
+    let sum = weights.values.reduce(0,{$0+$1})
+
+    print("MST_Prim parents: \(parents), count: \(parents.count), weight: \(sum)")
+
+    assert(weights.count == g.adj.count-1) // |G.V|-1
+    assert(sum == 37) // The total weight of the tree shown is 37.
+}
+
 extension Graph: CustomStringConvertible {
 
     public var description: String {
@@ -318,18 +249,52 @@ public enum GraphTests {
 
     public static func testAll() {
 
-//        testBFS()
-//        testDFS()
-//        testTopologicalSort()
+        BFSTests.testAll()
+        DFSTests.testAll()
+        testTopologicalSort()
 //        testSimplePathCount()
 //        testConnectedComponents()
-        testMinimumSpanningTree_Kruskal()
+//        testMinimumSpanningTree_Kruskal()
+//        testMinimumSpanningTree_Prim()
+    }
+
+    static func testMinimumSpanningTree_Prim() {
+
+        // Figure 23.1 CLRS
+        let g = Graph<V>(type: .undirected)
+        let a = V(tag: "a")
+        let b = V(tag: "b")
+        let c = V(tag: "c")
+        let d = V(tag: "d")
+        let e = V(tag: "e")
+        let f = V(tag: "f")
+        let gg = V(tag: "g")
+        let h = V(tag: "h")
+        let i = V(tag: "i")
+        g.addVertices([a, b, c, d, e, f, gg, h, i])
+        g.addEdge(a, b, 4)
+        g.addEdge(a, h, 8)
+        g.addEdge(b, c, 8)
+        g.addEdge(b, h, 11)
+        g.addEdge(c, d, 7)
+        g.addEdge(c, f, 4)
+        g.addEdge(c, i, 2)
+        g.addEdge(d, e, 9)
+        g.addEdge(d, f, 14)
+        g.addEdge(e, f, 10)
+        g.addEdge(f, gg, 2)
+        g.addEdge(gg, h, 1)
+        g.addEdge(gg, i, 6)
+        g.addEdge(h, i, 7)
+        print("Graph: \n\(g)")
+
+        MinimumSpanningTree_Prim(graph: g, r: a)
     }
 
     static func testMinimumSpanningTree_Kruskal() {
 
         // Figure 23.1 CLRS
-        let g = Graph<Character>(kind: .undirected)
+        let g = Graph<Character>(type: .undirected)
         g.addVertices(["a", "b", "c", "d", "e", "f", "g", "h", "i"])
         g.addEdge("a", "b", 4)
         g.addEdge("a", "h", 8)
@@ -350,18 +315,16 @@ public enum GraphTests {
         let edges = MinimumSpanningTree_Kruskal(graph: g)
         let sum = edges.reduce(0){$0 + $1.w}
 
-        print("MST edges: \(edges), count: \(edges.count), sum: \(sum)")
+        print("MST_Kruskal edges: \(edges), count: \(edges.count), sum: \(sum)")
 
         assert(edges.count == g.adj.count-1) // |G.V|-1
         assert(sum == 37) // The total weight of the tree shown is 37.
-
-//    edges.reduce(0, {(left, right) in left.w+right.w})
     }
 
     static func testConnectedComponents() {
 
         // Figure 21.1 CLRS
-        let g = Graph<Character>(kind: .undirected)
+        let g = Graph<Character>(type: .undirected)
         g.addVertex("a")
         g.addVertex("b")
         g.addVertex("c")
@@ -390,14 +353,13 @@ public enum GraphTests {
 
     static func testSimplePathCount() {
 
-        let g = Graph<Character>()
+        let g = Graph<Character>(type: .directed)
         g.addVertex("p")
         g.addVertex("o")
         g.addVertex("s")
         g.addVertex("r")
         g.addVertex("y")
         g.addVertex("v")
-
         g.addEdge("p", "o")
         g.addEdge("p", "s") //
         g.addEdge("o", "r")
@@ -416,7 +378,9 @@ public enum GraphTests {
 
     static func testTopologicalSort() {
 
-        let g = Graph<String>()
+        print("Test Topological Sort")
+
+        let g = Graph<String>(type: .directed)
         g.addVertex("undershorts")
         g.addVertex("socks")
         g.addVertex("watch")
@@ -443,59 +407,5 @@ public enum GraphTests {
 
         print("See list:")
         print(list)
-    }
-
-    static func testBFS() {
-
-        let g = Graph<Int>()
-        g.addVertex(1)
-        g.addVertex(3)
-        g.addVertex(5)
-        g.addVertex(7)
-        g.addVertex(9)
-        g.addEdge(3, 1)
-        g.addEdge(3, 5)
-        g.addEdge(3, 7)
-        g.addEdge(3, 9)
-        g.addEdge(1, 7)
-
-        print("See graph:")
-        print(g)
-
-        let parents = g.breadthFirstSearch(3)
-
-        print("See graph:")
-        print(g)
-
-        print("See the shortest path between vertices:")
-        g.printPath(3, 7, parents)
-    }
-
-    static func testDFS() {
-
-        let g = Graph<Character>()
-        g.addVertex("u")
-        g.addVertex("v")
-        g.addVertex("w")
-        g.addVertex("x")
-        g.addVertex("y")
-        g.addVertex("z")
-        g.addEdge("u", "v")
-        g.addEdge("u", "x")
-        g.addEdge("v", "y")
-        g.addEdge("w", "y")
-        g.addEdge("w", "z")
-        g.addEdge("x", "v")
-        g.addEdge("y", "x")
-        g.addEdge("z", "z")
-
-        print("See graph:")
-        print(g)
-
-        var topologicalListThatMustNotBeHere = [Character]()
-        g.depthFirstSearch(topologicalList: &topologicalListThatMustNotBeHere)
-
-        print("See graph:")
-        print(g)
     }
 }

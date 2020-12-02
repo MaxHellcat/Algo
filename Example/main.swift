@@ -23,7 +23,6 @@ func isSorted(arr: Array<Int>) -> Bool {
 //var arr = Array<Int>(1...10)
 //arr.reverse()
 //arr.shuffle()
-
 //print("\(arr), sorted: \(isSorted(arr: arr))")
 
 let before = Date().timeIntervalSince1970
@@ -51,6 +50,8 @@ let before = Date().timeIntervalSince1970
 
 //TestSinglyLinkedList.test()
 //TestDisjointSet.testAll()
+
+//TestBinaryHeap.testAll()
 
 GraphTests.testAll()
 
