@@ -38,7 +38,7 @@ func MST_Prim(graph g: Graph<V>, r: V) {
         v.key = Int.max
         v.p = nil
     }
-    r.key = 0
+    r.key = 0 // Should be decreaseKey() for V already added into heap
 
     // Custom code to properly build min heap
     var heapNodes: [MinHeap<V>.Node] = []
@@ -48,7 +48,7 @@ func MST_Prim(graph g: Graph<V>, r: V) {
         heapNodes.append(node)
     }
     let Q = MinHeap<V>(nodes: heapNodes)
-//    print("Heap: \(Q)")
+//    print("MinHeap: \(Q)")
 
     while !Q.isEmpty {
 

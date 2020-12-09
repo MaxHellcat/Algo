@@ -14,7 +14,7 @@ import Foundation
 func BellmanFord<T: Hashable>(_ g: Graph<T>, s: T) -> Bool {
 
     // O(V)
-    func InitSingleSource(_ g: Graph<T>, _ s: T) {
+    func initSingleSource(_ g: Graph<T>, _ s: T) {
         for v in g.adj.keys {
             d[v] = Int.max
             p[v] = nil
@@ -34,7 +34,7 @@ func BellmanFord<T: Hashable>(_ g: Graph<T>, s: T) -> Bool {
     var d = [T: Int]() // shortest-path estimate
     var p = [T: T]()
 
-    InitSingleSource(g, s) // O(V)
+    initSingleSource(g, s) // O(V)
 
     for _ in 0..<g.adj.count-1 { // O(V)
 

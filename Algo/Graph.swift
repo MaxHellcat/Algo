@@ -188,8 +188,9 @@ public enum GraphTests {
 //        testSimplePathCount()
 //        testConnectedComponents()
 //        testMinimumSpanningTree_Kruskal()
-        MST_PrimTests.testAll()
+//        MST_PrimTests.testAll()
 //        BellmanFordTests.testAll()
+        DijkstraTests.testAll()
     }
 
     static func testMinimumSpanningTree_Kruskal() {
