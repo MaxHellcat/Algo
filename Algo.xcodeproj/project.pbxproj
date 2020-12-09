@@ -12,7 +12,8 @@
 		AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2BF21E2475673A0090F575 /* RedBlackTree.swift */; };
 		AE2C84312486B97D00C05DA7 /* LMIS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C84302486B97D00C05DA7 /* LMIS.swift */; };
 		AE56B52324852A91006BCDDE /* LCS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE56B52224852A91006BCDDE /* LCS.swift */; };
-		AE86B947256681710076597E /* BinaryHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE86B946256681710076597E /* BinaryHeap.swift */; };
+		AE7573462580E385000919B2 /* MST_Prim.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7573452580E385000919B2 /* MST_Prim.swift */; };
+		AE86B947256681710076597E /* MinHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE86B946256681710076597E /* MinHeap.swift */; };
 		AEB5DD582577A9AA003FF652 /* BFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD572577A9AA003FF652 /* BFS.swift */; };
 		AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD682577C0C2003FF652 /* DFS.swift */; };
 		AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */; };
@@ -58,7 +59,8 @@
 		AE2BF21E2475673A0090F575 /* RedBlackTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBlackTree.swift; sourceTree = "<group>"; };
 		AE2C84302486B97D00C05DA7 /* LMIS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMIS.swift; sourceTree = "<group>"; };
 		AE56B52224852A91006BCDDE /* LCS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LCS.swift; sourceTree = "<group>"; };
-		AE86B946256681710076597E /* BinaryHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHeap.swift; sourceTree = "<group>"; };
+		AE7573452580E385000919B2 /* MST_Prim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MST_Prim.swift; sourceTree = "<group>"; };
+		AE86B946256681710076597E /* MinHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinHeap.swift; sourceTree = "<group>"; };
 		AEB5DD572577A9AA003FF652 /* BFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFS.swift; sourceTree = "<group>"; };
 		AEB5DD682577C0C2003FF652 /* DFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFS.swift; sourceTree = "<group>"; };
 		AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellmanFord.swift; sourceTree = "<group>"; };
@@ -138,9 +140,10 @@
 				AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */,
 				AEF855AF24AA51BD007CDD34 /* Graph.swift */,
 				AE17AFA52562C21300E03A07 /* DisjointSet.swift */,
-				AE86B946256681710076597E /* BinaryHeap.swift */,
+				AE86B946256681710076597E /* MinHeap.swift */,
 				AEB5DD572577A9AA003FF652 /* BFS.swift */,
 				AEB5DD682577C0C2003FF652 /* DFS.swift */,
+				AE7573452580E385000919B2 /* MST_Prim.swift */,
 				AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
@@ -265,11 +268,12 @@
 				AEFDA218246322850090E449 /* HeapSort.swift in Sources */,
 				AEFDA219246322850090E449 /* QuickSort.swift in Sources */,
 				AEFDA214246322850090E449 /* RandomizedSelect.swift in Sources */,
+				AE7573462580E385000919B2 /* MST_Prim.swift in Sources */,
 				AE17AFA62562C21300E03A07 /* DisjointSet.swift in Sources */,
 				AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */,
 				AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
-				AE86B947256681710076597E /* BinaryHeap.swift in Sources */,
+				AE86B947256681710076597E /* MinHeap.swift in Sources */,
 				AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,
 				AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */,

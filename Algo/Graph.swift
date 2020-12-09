@@ -14,8 +14,8 @@ public class Graph<T: Hashable> {
         case directed, undirected
     }
 
-    private(set) var adj = [T:[(v: T, w: Int)]]()
     private let type: DirectionType
+    private(set) var adj = [T:[(v: T, w: Int)]]()
 
     init(type: DirectionType) {
         self.type = type
@@ -55,7 +55,6 @@ public class Graph<T: Hashable> {
 
         var list = [T]()
 
-        // RESTORE
         DFS(self, topologicalList: &list)
 
         return list
@@ -172,76 +171,10 @@ func MinimumSpanningTree_Kruskal<T: Hashable>(graph g: Graph<T>) -> [(u: T, v: T
     return resultEdges
 }
 
-// TODO: Created for Prim's algorithm
-class V: Keyable, Hashable, CustomStringConvertible {
-    static func == (lhs: V, rhs: V) -> Bool {
-        return lhs.tag == rhs.tag
-    }
-
-    let tag: Character
-    var key = 0
-    init(tag: Character) {
-        self.tag = tag
-    }
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(tag)
-    }
-    var description: String {
-        return tag.description
-    }
-}
-
-// In Prim’s algorithm, the
-// set A forms a single tree. The safe edge added to A is always a least-weight edge
-// connecting the tree to a vertex not in the tree.
-// Time: O(V*lgV) as current implementation uses min-heap
-func MinimumSpanningTree_Prim(graph g: Graph<V>, r: V) {
-
-    var parents = [V: V?]()
-    var weights = [V: Int]() // MY
-
-    var inQueues = [V: Bool]()
-    for v in g.adj.keys {
-        v.key = Int.max
-        inQueues[v] = true
-    }
-    r.key = 0
-//    print("InQueues: \(inQueues)")
-
-    let heap = BinaryHeap(type: .min, nodes: Array(g.adj.keys))
-    print("Heap: \(heap)")
-
-    while heap.count > 0 {
-
-        let u = heap.extractMin() as! V
-        inQueues[u] = false
-
-        for (v,w) in g.adj[u]! {
-
-            if inQueues[v] == true && w < v.key {
-                parents[v] = u
-                weights[v] = w // MY
-                heap.decrease(node: v, key: w)
-            }
-        }
-    }
-
-    let sum = weights.values.reduce(0,{$0+$1})
-
-    print("MST_Prim parents: \(parents), count: \(parents.count), weight: \(sum)")
-
-    assert(weights.count == g.adj.count-1) // |G.V|-1
-    assert(sum == 37) // The total weight of the tree shown is 37.
-}
-
 extension Graph: CustomStringConvertible {
 
     public var description: String {
-        var s = ""
-        for (u, vs) in adj {
-            s += "\(u): \(vs)\n"
-        }
-        return s
+        return adj.reduce("", {$0 + "\($1.key): \($1.value)\n"})
     }
 }
 
@@ -255,41 +188,8 @@ public enum GraphTests {
 //        testSimplePathCount()
 //        testConnectedComponents()
 //        testMinimumSpanningTree_Kruskal()
-//        testMinimumSpanningTree_Prim()
-        BellmanFordTests.testAll()
-    }
-
-    static func testMinimumSpanningTree_Prim() {
-
-        // Figure 23.1 CLRS
-        let g = Graph<V>(type: .undirected)
-        let a = V(tag: "a")
-        let b = V(tag: "b")
-        let c = V(tag: "c")
-        let d = V(tag: "d")
-        let e = V(tag: "e")
-        let f = V(tag: "f")
-        let gg = V(tag: "g")
-        let h = V(tag: "h")
-        let i = V(tag: "i")
-        g.addVertices([a, b, c, d, e, f, gg, h, i])
-        g.addEdge(a, b, 4)
-        g.addEdge(a, h, 8)
-        g.addEdge(b, c, 8)
-        g.addEdge(b, h, 11)
-        g.addEdge(c, d, 7)
-        g.addEdge(c, f, 4)
-        g.addEdge(c, i, 2)
-        g.addEdge(d, e, 9)
-        g.addEdge(d, f, 14)
-        g.addEdge(e, f, 10)
-        g.addEdge(f, gg, 2)
-        g.addEdge(gg, h, 1)
-        g.addEdge(gg, i, 6)
-        g.addEdge(h, i, 7)
-        print("Graph: \n\(g)")
-
-        MinimumSpanningTree_Prim(graph: g, r: a)
+        MST_PrimTests.testAll()
+//        BellmanFordTests.testAll()
     }
 
     static func testMinimumSpanningTree_Kruskal() {
