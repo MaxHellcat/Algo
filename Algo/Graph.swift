@@ -190,7 +190,8 @@ public enum GraphTests {
 //        testMinimumSpanningTree_Kruskal()
 //        MST_PrimTests.testAll()
 //        BellmanFordTests.testAll()
-        DijkstraTests.testAll()
+//        DijkstraTests.testAll()
+        AllPairsShortestPathsTests.testAll()
     }
 
     static func testMinimumSpanningTree_Kruskal() {

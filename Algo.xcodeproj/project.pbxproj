@@ -15,6 +15,7 @@
 		AE7573462580E385000919B2 /* MST_Prim.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7573452580E385000919B2 /* MST_Prim.swift */; };
 		AE75734A2580E569000919B2 /* Dijkstra.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7573492580E569000919B2 /* Dijkstra.swift */; };
 		AE86B947256681710076597E /* MinHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE86B946256681710076597E /* MinHeap.swift */; };
+		AE9380B7259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */; };
 		AEB5DD582577A9AA003FF652 /* BFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD572577A9AA003FF652 /* BFS.swift */; };
 		AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD682577C0C2003FF652 /* DFS.swift */; };
 		AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */; };
@@ -63,6 +64,7 @@
 		AE7573452580E385000919B2 /* MST_Prim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MST_Prim.swift; sourceTree = "<group>"; };
 		AE7573492580E569000919B2 /* Dijkstra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dijkstra.swift; sourceTree = "<group>"; };
 		AE86B946256681710076597E /* MinHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinHeap.swift; sourceTree = "<group>"; };
+		AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPairsShortestPaths.swift; sourceTree = "<group>"; };
 		AEB5DD572577A9AA003FF652 /* BFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFS.swift; sourceTree = "<group>"; };
 		AEB5DD682577C0C2003FF652 /* DFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFS.swift; sourceTree = "<group>"; };
 		AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellmanFord.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				AE7573452580E385000919B2 /* MST_Prim.swift */,
 				AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */,
 				AE7573492580E569000919B2 /* Dijkstra.swift */,
+				AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -278,6 +281,7 @@
 				AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
 				AE86B947256681710076597E /* MinHeap.swift in Sources */,
+				AE9380B7259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift in Sources */,
 				AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,
 				AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */,
