@@ -22,48 +22,87 @@ fileprivate func PrintGraph(_ g: [[Int]]) {
 }
 
 // Time Ø(n^4)
-func SlowAllPairsShortestPaths(_ w: [[Int]]) -> [[Int]] {
+func SlowAllPairsShortestPaths(_ w: [[Int]]) -> ([[Int]], [[Int]]) {
 
     let n = w.count
+    var p = createP1(w) // Added to compute predecessor matrix
     var l = w
     for _ in 2...n-1 {
-        l = ExtendShortestPaths(l, w)
+        (l, p) = ExtendShortestPaths(l, w, p)
+        PrintGraph(p)
+        PrintGraph(l)
     }
-    return l
+    return (l, p)
+}
+
+// Added to compute predecessor matrix
+fileprivate func createP1(_ w: [[Int]]) -> [[Int]] {
+
+    let n = w.count
+    var result = Array<Array<Int>>(repeating: Array<Int>(repeating: 0, count: n), count: n)
+    for i in 0..<n {
+        for j in 0..<n {
+            if i != j && w[i][j] != INF {
+                result[i][j] = i
+            }
+            else {
+                result[i][j] = INF
+            }
+        }
+    }
+    return result
 }
 
 // Time Ø(n^3*lgn)
 func FasterAllPairsShortestPaths(_ w: [[Int]]) -> [[Int]] {
 
     let n = w.count
+    var p = createP1(w) // Not needed here, but added to make ExtendShortestPaths work
     var l = w
     var m = 1
     while m < n-1 {
-        l = ExtendShortestPaths(l, l)
+        (l, p) = ExtendShortestPaths(l, l, p)
         m = 2*m
     }
     return l
 }
 
 // Time Ø(n^3)
-fileprivate func ExtendShortestPaths(_ l: [[Int]], _ w: [[Int]]) -> [[Int]] {
+fileprivate func ExtendShortestPaths(_ l: [[Int]], _ w: [[Int]], _ p: [[Int]]) -> ([[Int]], [[Int]]) {
 
     let n = l.count
     var lPrime = Array<Array<Int>>(repeating: Array<Int>(repeating: 0, count: n), count: n)
+    var pPrime = Array<Array<Int>>(repeating: Array<Int>(repeating: 0, count: n), count: n)
     for i in 0..<n {
         for j in 0..<n {
-            lPrime[i][j] = Int.max
+//            lPrime[i][j] = INF // Original
+            lPrime[i][j] = l[i][j] // Added to compute predecessor matrix
+            pPrime[i][j] = p[i][j] // Added to compute predecessor matrix
             for k in 0..<n {
-                // Int.max +/- w causes range exception
+                // Check for < INF is unrelated to algorithm, as Int.max +/- w causes range exception
                 if l[i][k] < INF && w[k][j] < INF && lPrime[i][j] > l[i][k] + w[k][j] {
                     lPrime[i][j] = l[i][k] + w[k][j]
+                    pPrime[i][j] = k // Added to compute predecessor matrix
                 }
-
             }
         }
     }
 
-    return lPrime
+    return (lPrime, pPrime)
+}
+
+fileprivate func PrintAllPairsShortestPath(_ p: [[Int]], _ i: Int, _ j: Int) {
+
+    if i == j {
+        print(i)
+    }
+    else if p[i][j] == INF {
+        print("No path from \(i) to \(j) exists")
+    }
+    else {
+        PrintAllPairsShortestPath(p, i, p[i][j])
+        print(j)
+    }
 }
 
 enum AllPairsShortestPathsTests {
@@ -88,9 +127,13 @@ enum AllPairsShortestPathsTests {
         print("Input graph:")
         PrintGraph(w)
 
-        let ls = SlowAllPairsShortestPaths(w)
+        let (ls, ps) = SlowAllPairsShortestPaths(w)
         print("Output graph (slow):")
         PrintGraph(ls)
+
+        let i = 0, j = 2
+        print("Shortest path from \(i) to \(j):")
+        PrintAllPairsShortestPath(ps, i, j)
 
         let lf = FasterAllPairsShortestPaths(w)
         print("Output graph (fast):")
