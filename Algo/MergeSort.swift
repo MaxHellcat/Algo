@@ -40,9 +40,7 @@ func merge(_ arr: inout Array<Int>, _ p: Int, _ q: Int, _ r: Int) {
 
     var leftIndex = 0, rightIndex = 0
     for i in p...r {
-
         if leftIndex < leftSize && rightIndex < rightSize {
-
             if leftArr[leftIndex] <= rightArr[rightIndex] {
                 arr[i] = leftArr[leftIndex]
                 leftIndex += 1
@@ -52,15 +50,12 @@ func merge(_ arr: inout Array<Int>, _ p: Int, _ q: Int, _ r: Int) {
                 rightIndex += 1
             }
         }
-        else if leftIndex == leftSize {
-
-            arr[i] = rightArr[rightIndex]
-            rightIndex += 1
-        }
-        else if rightIndex == rightSize {
-
+        else if leftIndex < leftSize {
             arr[i] = leftArr[leftIndex]
             leftIndex += 1
+        }
+        else { // if rightIndex == rightSize {
+            break ; // Remaining right is already there
         }
     }
 }

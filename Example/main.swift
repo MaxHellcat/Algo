@@ -20,15 +20,17 @@ func isSorted(arr: Array<Int>) -> Bool {
     return true
 }
 
-//var arr = Array<Int>(1...10)
+var arr = Array<Int>(1...10)
 //arr.reverse()
-//arr.shuffle()
-//print("\(arr), sorted: \(isSorted(arr: arr))")
+arr.shuffle()
+//var arr = [1, 2, 3, 4, 5, 6, 7, 8]
+//var arr = [8, 7, 6, 5, 4, 3, 2, 1]
+print("\(arr), sorted: \(isSorted(arr: arr))")
 
 let before = Date().timeIntervalSince1970
 
 //insertionSort(&arr)
-//mergeSort(&arr, 0, arr.count-1)
+mergeSort(&arr, 0, arr.count-1)
 //quickSort(&arr, 0, arr.count-1)
 //heapSort(&arr)
 
@@ -53,10 +55,10 @@ let before = Date().timeIntervalSince1970
 
 //TestBinaryHeap.testAll()
 
-GraphTests.testAll()
+//GraphTests.testAll()
 
 let after = Date().timeIntervalSince1970
 let duration = after - before
 
-//print("\(arr), sorted: \(isSorted(arr: arr))")
+print("\(arr), sorted: \(isSorted(arr: arr))")
 print("Took: \(duration) seconds")
