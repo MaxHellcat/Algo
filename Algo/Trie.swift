@@ -76,12 +76,19 @@ public enum TrieTests {
 
         var w = "apple"
         print("Search \(w): \(trie.search(w))")
+        assert(trie.search(w) == true)
         w = "applicator"
         print("Search \(w): \(trie.search(w))")
+        assert(trie.search(w) == false)
+        w = "app"
+        print("Search \(w): \(trie.search(w))")
+        assert(trie.search(w) == false)
 
         w = "app"
         print("StartsWith \(w): \(trie.startsWith(w))")
+        assert(trie.startsWith(w) == true)
         w = "appp"
         print("StartsWith \(w): \(trie.startsWith(w))")
+        assert(trie.startsWith(w) == false)
     }
 }
