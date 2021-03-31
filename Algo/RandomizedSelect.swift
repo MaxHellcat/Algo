@@ -63,3 +63,16 @@ public func randomizedSelectIterative(_ arr: inout Array<Int>, _ p: Int, _ r: In
 
     return arr[resultIndex]
 }
+
+enum RandomizedSelectTests {
+
+    // TODO: Add proper tests for this!
+    static func testAll() {
+        var arr = Array<Int>(1...10)
+        let i = 7
+        let orderStatistic = randomizedSelect(&arr, 0, arr.count-1, i)
+        print("The \(i)th order statistic: \(orderStatistic)")
+        let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
+        print("The \(i)th order statistic: \(orderStatisticIter)")
+    }
+}

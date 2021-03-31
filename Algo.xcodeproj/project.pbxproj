@@ -21,6 +21,7 @@
 		AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */; };
 		AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED0FD60247FE694003FF1F7 /* CutRod.swift */; };
 		AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF855AF24AA51BD007CDD34 /* Graph.swift */; };
+		AEFD101E26147A8400D98D4B /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD101D26147A8400D98D4B /* Trie.swift */; };
 		AEFDA206246321CE0090E449 /* Algo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFDA204246321CE0090E449 /* Algo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20C246321EF0090E449 /* BinarySearchTree.swift */; };
 		AEFDA214246322850090E449 /* RandomizedSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20E246322840090E449 /* RandomizedSelect.swift */; };
@@ -70,6 +71,7 @@
 		AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellmanFord.swift; sourceTree = "<group>"; };
 		AED0FD60247FE694003FF1F7 /* CutRod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRod.swift; sourceTree = "<group>"; };
 		AEF855AF24AA51BD007CDD34 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		AEFD101D26147A8400D98D4B /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		AEFDA201246321CE0090E449 /* Algo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFDA204246321CE0090E449 /* Algo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algo.h; sourceTree = "<group>"; };
 		AEFDA205246321CE0090E449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */,
 				AE7573492580E569000919B2 /* Dijkstra.swift */,
 				AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */,
+				AEFD101D26147A8400D98D4B /* Trie.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -279,6 +282,7 @@
 				AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */,
 				AE75734A2580E569000919B2 /* Dijkstra.swift in Sources */,
 				AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */,
+				AEFD101E26147A8400D98D4B /* Trie.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
 				AE86B947256681710076597E /* MinHeap.swift in Sources */,
 				AE9380B7259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift in Sources */,

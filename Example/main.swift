@@ -16,49 +16,20 @@ func isSorted(arr: Array<Int>) -> Bool {
             return false
         }
     }
-
     return true
 }
 
-var arr = Array<Int>(1...10)
+//var arr = Array<Int>(1...10)
 //arr.reverse()
-arr.shuffle()
+//arr.shuffle()
 //var arr = [1, 2, 3, 4, 5, 6, 7, 8]
 //var arr = [8, 7, 6, 5, 4, 3, 2, 1]
-print("\(arr), sorted: \(isSorted(arr: arr))")
+//print("\(arr), sorted: \(isSorted(arr: arr))")
+//let before = Date().timeIntervalSince1970
+//let after = Date().timeIntervalSince1970
+//let duration = after - before
+//
+//print("\(arr), sorted: \(isSorted(arr: arr))")
+//print("Took: \(duration) seconds")
 
-let before = Date().timeIntervalSince1970
-
-//insertionSort(&arr)
-mergeSort(&arr, 0, arr.count-1)
-//quickSort(&arr, 0, arr.count-1)
-//heapSort(&arr)
-
-//let i = 7
-//let orderStatistic = randomizedSelect(&arr, 0, arr.count-1, i)
-//print("The \(i)th order statistic: \(orderStatistic)")
-//let orderStatisticIter = randomizedSelectIterative(&arr, 0, arr.count-1, i)
-//print("The \(i)th order statistic: \(orderStatisticIter)")
-
-//BinarySearchTree.test()
-//RedBlackTree.test()
-
-//CutRod.test()
-//LCS.test()
-//LMIS.test()
-//ActivitySelection.test()
-
-//GraphTests.test()
-
-//TestSinglyLinkedList.test()
-//TestDisjointSet.testAll()
-
-//TestBinaryHeap.testAll()
-
-//GraphTests.testAll()
-
-let after = Date().timeIntervalSince1970
-let duration = after - before
-
-print("\(arr), sorted: \(isSorted(arr: arr))")
-print("Took: \(duration) seconds")
+TrieTests.testAll()
