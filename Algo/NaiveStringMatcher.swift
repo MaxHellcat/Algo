@@ -21,10 +21,10 @@ func NaiveStringMatcher(_ t: [Character], _ p: [Character]) {
 }
 
 // Time O(m), space O(1)
-fileprivate func compare(_ t: [Character], _ s: Int, _ p: [Character]) -> Bool {
-    let m = p.count
+func compare<T: Comparable>(_ T: [T], _ s: Int, _ P: [T]) -> Bool {
+    let m = P.count
     for i in 0..<m {
-        if p[i] != t[s+i] {
+        if P[i] != T[s+i] {
             return false
         }
     }

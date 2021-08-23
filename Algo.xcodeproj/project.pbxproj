@@ -22,6 +22,7 @@
 		AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED0FD60247FE694003FF1F7 /* CutRod.swift */; };
 		AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF855AF24AA51BD007CDD34 /* Graph.swift */; };
 		AEF9656F26D3AB2200351C49 /* NaiveStringMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */; };
+		AEF9657526D3F16100351C49 /* RabinKarpMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF9657426D3F16100351C49 /* RabinKarpMatcher.swift */; };
 		AEFD101E26147A8400D98D4B /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD101D26147A8400D98D4B /* Trie.swift */; };
 		AEFDA206246321CE0090E449 /* Algo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFDA204246321CE0090E449 /* Algo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20C246321EF0090E449 /* BinarySearchTree.swift */; };
@@ -73,6 +74,7 @@
 		AED0FD60247FE694003FF1F7 /* CutRod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRod.swift; sourceTree = "<group>"; };
 		AEF855AF24AA51BD007CDD34 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaiveStringMatcher.swift; sourceTree = "<group>"; };
+		AEF9657426D3F16100351C49 /* RabinKarpMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinKarpMatcher.swift; sourceTree = "<group>"; };
 		AEFD101D26147A8400D98D4B /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		AEFDA201246321CE0090E449 /* Algo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFDA204246321CE0090E449 /* Algo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algo.h; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */,
 				AEFD101D26147A8400D98D4B /* Trie.swift */,
 				AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */,
+				AEF9657426D3F16100351C49 /* RabinKarpMatcher.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -297,6 +300,7 @@
 				AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */,
 				AEFDA217246322850090E449 /* MergeSort.swift in Sources */,
 				AEB5DD582577A9AA003FF652 /* BFS.swift in Sources */,
+				AEF9657526D3F16100351C49 /* RabinKarpMatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
