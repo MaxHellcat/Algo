@@ -21,6 +21,7 @@
 		AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */; };
 		AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED0FD60247FE694003FF1F7 /* CutRod.swift */; };
 		AEF855B024AA51BD007CDD34 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF855AF24AA51BD007CDD34 /* Graph.swift */; };
+		AEF9656F26D3AB2200351C49 /* NaiveStringMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */; };
 		AEFD101E26147A8400D98D4B /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFD101D26147A8400D98D4B /* Trie.swift */; };
 		AEFDA206246321CE0090E449 /* Algo.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFDA204246321CE0090E449 /* Algo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA20C246321EF0090E449 /* BinarySearchTree.swift */; };
@@ -71,6 +72,7 @@
 		AEB5DD6E2577CA2D003FF652 /* BellmanFord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellmanFord.swift; sourceTree = "<group>"; };
 		AED0FD60247FE694003FF1F7 /* CutRod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRod.swift; sourceTree = "<group>"; };
 		AEF855AF24AA51BD007CDD34 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaiveStringMatcher.swift; sourceTree = "<group>"; };
 		AEFD101D26147A8400D98D4B /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		AEFDA201246321CE0090E449 /* Algo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Algo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEFDA204246321CE0090E449 /* Algo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Algo.h; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				AE7573492580E569000919B2 /* Dijkstra.swift */,
 				AE9380B6259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift */,
 				AEFD101D26147A8400D98D4B /* Trie.swift */,
+				AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -286,6 +289,7 @@
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
 				AE86B947256681710076597E /* MinHeap.swift in Sources */,
 				AE9380B7259B5ECD00C1ECB1 /* AllPairsShortestPaths.swift in Sources */,
+				AEF9656F26D3AB2200351C49 /* NaiveStringMatcher.swift in Sources */,
 				AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,
 				AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */,
