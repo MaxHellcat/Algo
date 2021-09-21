@@ -33,6 +33,8 @@
 		AEFDA218246322850090E449 /* HeapSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA212246322850090E449 /* HeapSort.swift */; };
 		AEFDA219246322850090E449 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA213246322850090E449 /* QuickSort.swift */; };
 		AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */; };
+		AEFE7F0B26FA5445003A405D /* FiniteAutomatonMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE7F0A26FA5445003A405D /* FiniteAutomatonMatcher.swift */; };
+		AEFE7F0D26FA5CB4003A405D /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE7F0C26FA5CB4003A405D /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		AEFDA212246322850090E449 /* HeapSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeapSort.swift; sourceTree = "<group>"; };
 		AEFDA213246322850090E449 /* QuickSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSort.swift; sourceTree = "<group>"; };
 		AEFDA474248F90B6003E5AD1 /* ActivitySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
+		AEFE7F0A26FA5445003A405D /* FiniteAutomatonMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiniteAutomatonMatcher.swift; sourceTree = "<group>"; };
+		AEFE7F0C26FA5CB4003A405D /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,8 @@
 				AEFD101D26147A8400D98D4B /* Trie.swift */,
 				AEF9656E26D3AB2200351C49 /* NaiveStringMatcher.swift */,
 				AEF9657426D3F16100351C49 /* RabinKarpMatcher.swift */,
+				AEFE7F0A26FA5445003A405D /* FiniteAutomatonMatcher.swift */,
+				AEFE7F0C26FA5CB4003A405D /* Tests.swift */,
 				AEFDA204246321CE0090E449 /* Algo.h */,
 				AEFDA205246321CE0090E449 /* Info.plist */,
 			);
@@ -288,6 +294,7 @@
 				AEFDA475248F90B6003E5AD1 /* ActivitySelection.swift in Sources */,
 				AE75734A2580E569000919B2 /* Dijkstra.swift in Sources */,
 				AEB5DD6F2577CA2D003FF652 /* BellmanFord.swift in Sources */,
+				AEFE7F0D26FA5CB4003A405D /* Tests.swift in Sources */,
 				AEFD101E26147A8400D98D4B /* Trie.swift in Sources */,
 				AE56B52324852A91006BCDDE /* LCS.swift in Sources */,
 				AE86B947256681710076597E /* MinHeap.swift in Sources */,
@@ -296,6 +303,7 @@
 				AEB5DD692577C0C2003FF652 /* DFS.swift in Sources */,
 				AEFDA216246322850090E449 /* SinglyLinkedList.swift in Sources */,
 				AE2BF21F2475673A0090F575 /* RedBlackTree.swift in Sources */,
+				AEFE7F0B26FA5445003A405D /* FiniteAutomatonMatcher.swift in Sources */,
 				AEFDA20D246321EF0090E449 /* BinarySearchTree.swift in Sources */,
 				AED0FD61247FE694003FF1F7 /* CutRod.swift in Sources */,
 				AEFDA217246322850090E449 /* MergeSort.swift in Sources */,

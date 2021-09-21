@@ -74,11 +74,13 @@ public enum LMIS {
 
     public static func test() {
 
-        let arr = [7, 3, 1, 2, 5, 9, 6, 8, 4] // 1, 2, 5, 6, 8
+//        let arr = [7, 3, 1, 2, 5, 9, 6, 8, 4] // 1, 2, 5, 6, 8
 //        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 //        let arr = [9, 8, 7, 3, 5, 4, 6, 2, 1]
 //        let arr: Array<Int> = [1, 1, 1, 1, 1]
 //        let arr: Array<Int> = []
+
+        let arr = [7,8,2,5,1,6] // NOTE: Implementations fail with this test case
 
         let val1 = lmisRecursive(arr, 0)
         print("Val1: \(val1)")

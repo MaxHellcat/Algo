@@ -39,10 +39,6 @@ func RabinKarpMatcher(_ T: [Int], _ P: [Int], _ d: Int, _ q: Int) {
     }
 }
 
-protocol Tests {
-    static func test()
-}
-
 public enum RabinKarpMatcher_Tests: Tests {
     public static func test() {
         // Testing on 0..9 digits, can be easily adjusted for ascii

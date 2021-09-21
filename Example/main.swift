@@ -10,7 +10,6 @@ import Foundation
 import Algo
 
 func isSorted(arr: Array<Int>) -> Bool {
-
     for i in 0..<arr.count-1 {
         if arr[i] > arr[i+1] {
             return false
@@ -34,4 +33,7 @@ func isSorted(arr: Array<Int>) -> Bool {
 
 //TrieTests.testAll()
 //NaiveStringMatcher_Tests.test()
-RabinKarpMatcher_Tests.test()
+//RabinKarpMatcher_Tests.test()
+
+//LMIS.test()
+FiniteAutomatonMatcher_Tests.test()
