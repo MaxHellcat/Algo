@@ -32,8 +32,8 @@ func isSorted(arr: Array<Int>) -> Bool {
 //print("Took: \(duration) seconds")
 
 //TrieTests.testAll()
+//LMIS.test()
 //NaiveStringMatcher_Tests.test()
 //RabinKarpMatcher_Tests.test()
-
-//LMIS.test()
-FiniteAutomatonMatcher_Tests.test()
+//FiniteAutomatonMatcher_Tests.test()
+KMPMatcher_Tests.test()
